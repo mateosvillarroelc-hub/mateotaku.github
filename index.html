@@ -195,6 +195,9 @@
 </head>
 <body>
 
+    <!-- REPRODUCTOR DE MÚSICA INVISIBLE -->
+    <audio id="reproductor-musica" loop></audio>
+
     <!-- VISTA PRINCIPAL (Catálogo) -->
     <div id="vista-principal">
         <header>
@@ -245,8 +248,7 @@
 
     <script>
         // --- BASE DE DATOS ACTUALIZADA ---
-        // Ahora tienes enlaceAnime, enlaceManga y enlaceNovela. 
-        // Si dejas las comillas vacías "", el botón no aparecerá.
+        // Tus enlaces están intactos. He añadido "musica: ''" al final de cada uno.
         
         const animes = [
             { 
@@ -254,32 +256,36 @@
                 imagen: "https://cdng.europosters.eu/pod_public/750/229900.jpg", 
                 fondoAnimado: "https://64.media.tumblr.com/348ce108b19c5998e846daca63b4ed81/tumblr_n91q6d9rOc1szl458o1_500.gif",
                 enlaceAnime: "https://tioanime.com/anime/naruto",
-                enlaceManga: "TU_ENLACE_AQUI_MANGA",
-                enlaceNovela: "" 
+                enlaceManga: "https://lectortmoo.com/manga/naruto/",
+                enlaceNovela: " https://youtube.com/playlist?list=PLtjiNQasoV0tD7tCcegoB-_yk4ljLHiV8&si=s-Agsbj8SYKzZYdR",
+                musica: "AQUI_PON_TU_ENLACE_MP3_PARA_NARUTO" // <-- ¡Aquí va el mp3!
             },
             { 
                 titulo: "Jujutsu Kaisen", 
                 imagen: "https://www.ifema.es/img/xl/manga-jujutsu-kaisen/manga-jujutsu-kaisen.jpeg", 
                 fondoAnimado: "https://i.pinimg.com/originals/2a/cd/b9/2acdb9192f82fc1726058bb37e7a88aa.gif",
                 enlaceAnime: "https://tioanime.com/anime/jujutsu-kaisen-tv",
-                enlaceManga: "TU_ENLACE_AQUI_MANGA",
-                enlaceNovela: "" 
+                enlaceManga: "https://lectortmoo.com/manga/jujutsu-kaisen/",
+                enlaceNovela: "https://mokochan314.home.blog/jujutsu-kaisen-official-light-novels/",
+                musica: ""
             },
             { 
                 titulo: "Shingeki no Kyojin", 
                 imagen: "https://m.media-amazon.com/images/I/71uHZO5ChkL._AC_UF894,1000_QL80_.jpg",
                 fondoAnimado: "https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyOTFrdXFiYnhlbGxtYTlpeHlqcWR5ZWF4NTFwNnZ6aWhrOGFwcHFmMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/9SvQFZ5xoGHza/giphy.gif", 
                 enlaceAnime: "https://tioanime.com/directorio?q=shingeki+no+",
-                enlaceManga: "",
-                enlaceNovela: "" 
+                enlaceManga: "https://lectortmoo.com/manga/shingeki-no-kyojin/",
+                enlaceNovela: "",
+                musica: ""
             },
             { 
                 titulo: "Kimetsu no Yaiba", 
                 imagen: "https://es.kotaku.com/app/uploads/2026/04/Diseno-sin-titulo-2026-04-14T132626.562.jpg", 
                 fondoAnimado: "https://giffiles.alphacoders.com/220/220195.gif",
                 enlaceAnime: "https://tioanime.com/anime/kimetsu-no-yaiba",
-                enlaceManga: "",
-                enlaceNovela: "" 
+                enlaceManga: "https://lectortmoo.com/manga/kimetsu-no-yaiba/",
+                enlaceNovela: "https://mokochan314.home.blog/kimetsu-no-yaiba-official-light-novels/",
+                musica: ""
             }
         ];
 
@@ -290,7 +296,8 @@
                 fondoAnimado: "https://placehold.co/1920x1080/2d2d2d/a29bfe?text=Fondo", 
                 enlaceAnime: "",
                 enlaceManga: "TU_ENLACE_AQUI_MANGA",
-                enlaceNovela: "" 
+                enlaceNovela: "",
+                musica: ""
             }
         ];
 
@@ -301,11 +308,12 @@
                 fondoAnimado: "https://placehold.co/1920x1080/2d2d2d/00b894?text=Fondo", 
                 enlaceAnime: "TU_ENLACE_AQUI_ANIME",
                 enlaceManga: "TU_ENLACE_AQUI_MANGA",
-                enlaceNovela: "TU_ENLACE_AQUI_NOVELA" 
+                enlaceNovela: "TU_ENLACE_AQUI_NOVELA",
+                musica: ""
             }
         ];
 
-        // --- SISTEMA PARA CAMBIAR DE PANTALLA ---
+        // --- SISTEMA PARA CAMBIAR DE PANTALLA Y MUSICA ---
         function mostrarTarjetas(lista, contenedorId) {
             const contenedor = document.getElementById(contenedorId);
             let contenidoHtml = '';
@@ -332,6 +340,15 @@
             document.getElementById('vista-detalle').style.backgroundImage = `url('${item.fondoAnimado}')`;
             document.getElementById('detalle-titulo').textContent = item.titulo;
             
+            // REPRODUCIR LA MÚSICA SI EXISTE
+            const reproductor = document.getElementById('reproductor-musica');
+            if(item.musica && item.musica !== "" && item.musica !== "AQUI_PON_TU_ENLACE_MP3_PARA_NARUTO") {
+                reproductor.src = item.musica;
+                reproductor.play().catch(e => console.log("El navegador bloqueó el autoplay", e));
+            } else {
+                reproductor.src = "";
+            }
+
             const btnAnime = document.getElementById('btn-anime');
             const btnManga = document.getElementById('btn-manga');
             const btnNovela = document.getElementById('btn-novela');
@@ -339,7 +356,6 @@
 
             let enlacesActivos = 0;
 
-            // Lógica para mostrar/ocultar el botón de ANIME
             if(item.enlaceAnime && item.enlaceAnime !== "") {
                 btnAnime.href = item.enlaceAnime;
                 btnAnime.style.display = 'inline-block';
@@ -348,7 +364,6 @@
                 btnAnime.style.display = 'none';
             }
 
-            // Lógica para mostrar/ocultar el botón de MANGA
             if(item.enlaceManga && item.enlaceManga !== "") {
                 btnManga.href = item.enlaceManga;
                 btnManga.style.display = 'inline-block';
@@ -357,7 +372,6 @@
                 btnManga.style.display = 'none';
             }
 
-            // Lógica para mostrar/ocultar el botón de NOVELA
             if(item.enlaceNovela && item.enlaceNovela !== "") {
                 btnNovela.href = item.enlaceNovela;
                 btnNovela.style.display = 'inline-block';
@@ -366,7 +380,6 @@
                 btnNovela.style.display = 'none';
             }
 
-            // Ajuste del texto descriptivo
             if (enlacesActivos > 0) {
                 desc.textContent = `Selecciona qué formato de ${item.titulo} deseas disfrutar:`;
             } else {
@@ -375,6 +388,11 @@
         }
 
         function volverAlCatalogo() {
+            // DETENER LA MÚSICA
+            const reproductor = document.getElementById('reproductor-musica');
+            reproductor.pause();
+            reproductor.currentTime = 0;
+
             document.getElementById('vista-detalle').style.display = 'none';
             document.getElementById('vista-principal').style.display = 'block';
         }
