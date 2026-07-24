@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Biblioteca Otaku</title>
+    <!-- Fuentes elegantes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lora:ital@1&display=swap" rel="stylesheet">
+    
     <style>
-        /* Diseño General */
-       body {
+        /* --- DISEÑO GENERAL Y FONDO --- */
+        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Aquí está la magia: Un filtro oscuro + una imagen de paisaje anime */
+            /* El filtro oscuro y el paisaje anime */
             background: linear-gradient(rgba(15, 15, 15, 0.85), rgba(15, 15, 15, 0.95)), url('https://cdn.wallpapersafari.com/31/92/a1oLCz.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
@@ -17,42 +20,87 @@
             scroll-behavior: smooth;
         }
 
-        /* BARRA DE NAVEGACIÓN Y DESCRIPCIÓN */
-        header {
-            background-color: #141414;
-            padding: 20px;
+        /* --- NUEVO ENCABEZADO ÉPICO (Estilo Mushoku) --- */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            border-bottom: 2px solid #6c5ce7;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            padding: 80px 20px 60px 20px;
+            min-height: 50vh;
+            background: radial-gradient(circle, rgba(15,15,15,0.4) 0%, rgba(15,15,15,0.9) 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        header h1 {
-            margin: 0 0 15px 0;
-            color: #6c5ce7;
+
+        .hero-subtitle {
+            color: #d4af37; /* Dorado oscuro */
+            font-size: 0.9rem;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        nav a {
-            color: #a29bfe;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.1rem;
+            margin-bottom: 15px;
             font-weight: bold;
-            transition: color 0.3s;
         }
-        nav a:hover { color: #ffffff; }
 
-        .site-description {
-            background-color: #1a1a1a;
-            text-align: center;
-            padding: 30px 20px;
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: 5rem;
+            margin: 0;
+            /* Efecto de texto dorado brillante */
+            background: linear-gradient(to bottom, #fffde4, #e2b938);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 10px 20px rgba(0,0,0,0.8);
+            line-height: 1.1;
         }
-        .site-description p { margin: 0 auto; font-size: 1.2rem; color: #dfe6e9; max-width: 800px; }
-        .site-description span { display: block; margin-top: 10px; font-size: 0.95rem; color: #a29bfe; font-style: italic; }
 
-        /* VISTA PRINCIPAL (EL CATÁLOGO) */
-        #vista-principal {
-            display: block; 
+        .hero-desc {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            color: #dcdde1;
+            max-width: 700px;
+            margin: 25px auto;
+            font-style: italic;
+            text-shadow: 1px 1px 5px rgba(0,0,0,1);
         }
+
+        .hero-desc span {
+            display: block;
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #a29bfe;
+        }
+
+        .hero-nav {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Botones del encabezado */
+        .hero-nav a {
+            background: linear-gradient(45deg, #d35400, #f39c12); /* Degradado Naranja/Dorado */
+            color: white;
+            text-decoration: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hero-nav a:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.8);
+        }
+
+        /* --- VISTA PRINCIPAL (EL CATÁLOGO) --- */
+        #vista-principal { display: block; }
         
         .container {
             max-width: 1300px;
@@ -60,7 +108,14 @@
             padding: 20px;
         }
         section { padding-top: 40px; margin-bottom: 60px; }
-        h2 { border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 30px; font-size: 2rem; }
+        h2 { 
+            border-bottom: 2px solid rgba(255,255,255,0.1); /* Línea más suave */
+            padding-bottom: 10px; 
+            margin-bottom: 30px; 
+            font-size: 2rem; 
+            font-family: 'Cinzel', serif; /* Títulos de sección más elegantes */
+            color: #f39c12;
+        }
 
         .grid {
             display: grid;
@@ -68,23 +123,24 @@
             gap: 25px;
         }
         .card {
-            background-color: #1e1e1e;
+            background-color: rgba(30, 30, 30, 0.6); /* Tarjetas un poco transparentes */
             border-radius: 10px;
             overflow: hidden;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #2a2a2a;
+            border: 1px solid rgba(255,255,255,0.1);
             cursor: pointer;
+            backdrop-filter: blur(5px);
         }
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
-            border-color: #6c5ce7;
+            box-shadow: 0 10px 20px rgba(243, 156, 18, 0.3);
+            border-color: #f39c12;
         }
         .card img { width: 100%; height: 280px; object-fit: cover; }
         .card h3 { padding: 12px; margin: 0; font-size: 1rem; color: #dfe6e9; }
 
-        /* VISTA DE DETALLE */
+        /* --- VISTA DE DETALLE (PANTALLA CON GIF) --- */
         #vista-detalle {
             display: none; 
             min-height: 100vh;
@@ -128,9 +184,10 @@
         }
 
         .detalle-titulo {
+            font-family: 'Cinzel', serif;
             font-size: 5rem;
             color: #ffffff;
-            text-shadow: 0 0 20px rgba(108, 92, 231, 0.8), 0 0 40px rgba(0,0,0,1);
+            text-shadow: 0 0 20px rgba(243, 156, 18, 0.8), 0 0 40px rgba(0,0,0,1);
             margin: 0 0 20px 0;
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -145,7 +202,6 @@
             line-height: 1.5;
         }
 
-        /* CONTENEDOR DE BOTONES DINÁMICOS */
         .botones-container {
             display: flex;
             gap: 20px;
@@ -166,27 +222,13 @@
             letter-spacing: 1px;
         }
 
-        .btn-magico:hover {
-            transform: scale(1.1);
-        }
+        .btn-magico:hover { transform: scale(1.1); }
 
-        /* Colores específicos para cada botón */
-        .btn-anime {
-            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
-            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.6);
-        }
+        .btn-anime { background: linear-gradient(45deg, #6c5ce7, #a29bfe); box-shadow: 0 4px 20px rgba(108, 92, 231, 0.6); }
         .btn-anime:hover { box-shadow: 0 8px 30px rgba(108, 92, 231, 0.9); }
-
-        .btn-manga {
-            background: linear-gradient(45deg, #0984e3, #74b9ff);
-            box-shadow: 0 4px 20px rgba(9, 132, 227, 0.6);
-        }
+        .btn-manga { background: linear-gradient(45deg, #0984e3, #74b9ff); box-shadow: 0 4px 20px rgba(9, 132, 227, 0.6); }
         .btn-manga:hover { box-shadow: 0 8px 30px rgba(9, 132, 227, 0.9); }
-
-        .btn-novela {
-            background: linear-gradient(45deg, #00b894, #55efc4);
-            box-shadow: 0 4px 20px rgba(0, 184, 148, 0.6);
-        }
+        .btn-novela { background: linear-gradient(45deg, #00b894, #55efc4); box-shadow: 0 4px 20px rgba(0, 184, 148, 0.6); }
         .btn-novela:hover { box-shadow: 0 8px 30px rgba(0, 184, 148, 0.9); }
 
         @keyframes fadeIn {
@@ -197,24 +239,26 @@
 </head>
 <body>
 
-    
+    <!-- REPRODUCTOR DE MÚSICA -->
     <audio id="reproductor-musica" loop></audio>
 
     <!-- VISTA PRINCIPAL (Catálogo) -->
     <div id="vista-principal">
-        <header>
-            <h1>Mi Universo Otaku</h1>
-            <nav>
-                <a href="#animes">Animes</a>
-                <a href="#mangas">Mangas</a>
+        
+        <!-- NUEVO ENCABEZADO ESTILO MUSHOKU -->
+        <header class="hero-section">
+            <span class="hero-subtitle">♦ Mi Biblioteca Personal ♦</span>
+            <h1 class="hero-title">MI UNIVERSO<br>OTAKU</h1>
+            <p class="hero-desc">
+                Esta página está hecha para que los amantes del anime, manga y novela ligera puedan seguir lo que les gusta.
+                <span>(Te redireccionará al contenido que tú quieras ver)</span>
+            </p>
+            <nav class="hero-nav">
+                <a href="#animes">Ver Animes</a>
+                <a href="#mangas">Leer Mangas</a>
                 <a href="#novelas">Novelas Ligeras</a>
             </nav>
         </header>
-
-        <div class="site-description">
-            <p>Esta página está hecha para que los amantes del anime, manga y novela ligera puedan seguir lo que les gusta.</p>
-            <span>(Esta página te redireccionará al anime, novela o manga que tú quieras ver)</span>
-        </div>
 
         <div class="container">
             <section id="animes">
@@ -232,14 +276,13 @@
         </div>
     </div>
 
-   
+    <!-- VISTA DE DETALLE (Pantalla con el GIF) -->
     <div id="vista-detalle">
         <div class="detalle-overlay">
             <button class="btn-volver" onclick="volverAlCatalogo()">⬅ Volver al inicio</button>
             <h2 class="detalle-titulo" id="detalle-titulo">Título</h2>
             <p class="detalle-desc" id="detalle-desc">Descripción...</p>
             
-            <!-- CONTENEDOR DONDE APARECERÁN LOS BOTONES MÁGICAMENTE -->
             <div class="botones-container" id="botones-container">
                 <a href="#" target="_blank" class="btn-magico btn-anime" id="btn-anime">▶ Ver Anime</a>
                 <a href="#" target="_blank" class="btn-magico btn-manga" id="btn-manga">📖 Leer Manga</a>
@@ -249,8 +292,7 @@
     </div>
 
     <script>
-        
-        
+        // --- TUS DATOS INTACTOS ---
         const animes = [
             { 
                 titulo: "Naruto", 
@@ -259,7 +301,7 @@
                 enlaceAnime: "https://tioanime.com/anime/naruto",
                 enlaceManga: "https://lectortmoo.com/manga/naruto/",
                 enlaceNovela: " https://youtube.com/playlist?list=PLtjiNQasoV0tD7tCcegoB-_yk4ljLHiV8&si=s-Agsbj8SYKzZYdR",
-                musica: "narutos-theme-song.mp3" // <-- ¡Aquí va el mp3!
+                musica: "narutos-theme-song.mp3"
             },
             { 
                 titulo: "Jujutsu Kaisen", 
@@ -314,7 +356,7 @@
             }
         ];
 
-        // SISTEMA PARA CAMBIAR DE PANTALLA Y MUSICA
+        // --- SISTEMA INTERNO ---
         function mostrarTarjetas(lista, contenedorId) {
             const contenedor = document.getElementById(contenedorId);
             let contenidoHtml = '';
@@ -341,7 +383,7 @@
             document.getElementById('vista-detalle').style.backgroundImage = `url('${item.fondoAnimado}')`;
             document.getElementById('detalle-titulo').textContent = item.titulo;
             
-            // REPRODUCIR LA MÚSICA SI EXISTE
+            // REPRODUCIR LA MÚSICA
             const reproductor = document.getElementById('reproductor-musica');
             if(item.musica && item.musica !== "" && item.musica !== "AQUI_PON_TU_ENLACE_MP3_PARA_NARUTO") {
                 reproductor.src = item.musica;
@@ -361,25 +403,19 @@
                 btnAnime.href = item.enlaceAnime;
                 btnAnime.style.display = 'inline-block';
                 enlacesActivos++;
-            } else {
-                btnAnime.style.display = 'none';
-            }
+            } else { btnAnime.style.display = 'none'; }
 
             if(item.enlaceManga && item.enlaceManga !== "") {
                 btnManga.href = item.enlaceManga;
                 btnManga.style.display = 'inline-block';
                 enlacesActivos++;
-            } else {
-                btnManga.style.display = 'none';
-            }
+            } else { btnManga.style.display = 'none'; }
 
             if(item.enlaceNovela && item.enlaceNovela !== "") {
                 btnNovela.href = item.enlaceNovela;
                 btnNovela.style.display = 'inline-block';
                 enlacesActivos++;
-            } else {
-                btnNovela.style.display = 'none';
-            }
+            } else { btnNovela.style.display = 'none'; }
 
             if (enlacesActivos > 0) {
                 desc.textContent = `Selecciona qué formato de ${item.titulo} deseas disfrutar:`;
@@ -398,7 +434,7 @@
             document.getElementById('vista-principal').style.display = 'block';
         }
 
-        // Inicialización
+        // INICIAR LA PÁGINA
         mostrarTarjetas(animes, 'grid-animes');
         mostrarTarjetas(mangas, 'grid-mangas');
         mostrarTarjetas(novelas, 'grid-novelas');
