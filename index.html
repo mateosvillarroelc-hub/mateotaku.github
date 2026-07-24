@@ -22,7 +22,7 @@
             text-align: center;
             position: sticky;
             top: 0;
-            z-index: 50; /* Cambiado a 50 para que el modal quede por encima */
+            z-index: 50;
             border-bottom: 2px solid #6c5ce7;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
@@ -211,7 +211,6 @@
         </nav>
     </header>
 
-    <!-- DESCRIPCIÓN DE LA PÁGINA -->
     <div class="site-description">
         <p>Esta página está hecha para que los amantes del anime, manga y novela ligera puedan seguir lo que les gusta.</p>
         <span>(Esta página te redireccionará al anime, novela y manga que tú quieras ver)</span>
@@ -234,69 +233,93 @@
         </section>
     </div>
 
-    <!-- ESTRUCTURA OCULTA DE LA VENTANA EMERGENTE -->
     <div class="modal-overlay" id="chapter-modal">
         <div class="modal-content">
             <button class="close-btn" onclick="cerrarModal()">✖</button>
             <h2 class="modal-title" id="modal-title">Título</h2>
             <div class="chapter-list" id="chapter-list">
-                <!-- Los botones de los capítulos aparecerán aquí -->
             </div>
         </div>
     </div>
 
     <script>
-        // BASE DE DATOS (AQUÍ AGREGAS LOS ENLACES A OTRAS PÁGINAS)
-        
+        // ANIMES (20)
         const animes = [
-            { 
-                titulo: "Naruto", 
-                imagen: "https://cdng.europosters.eu/pod_public/750/229900.jpg",
-                capitulos: [
-                    { nombre: "Capítulo 1", url: "https://tu-pagina-externa.com/naruto-ep1" },
-                    { nombre: "Capítulo 2", url: "https://tu-pagina-externa.com/naruto-ep2" },
-                    { nombre: "Capítulo 3", url: "https://tu-pagina-externa.com/naruto-ep3" }
-                ]
-            },
-            { 
-                titulo: "Jujutsu Kaisen", 
-                imagen: "https://m.media-amazon.com/images/I/81A2y1EW1QL._AC_SY879_.jpg",
-                capitulos: [
-                    { nombre: "Temporada 1 - Cap 1", url: "https://link-a-jujutsu.com/cap1" },
-                    { nombre: "Temporada 1 - Cap 2", url: "https://link-a-jujutsu.com/cap2" }
-                ]
-            }
-            // Puedes seguir agregando más animes siguiendo este mismo formato...
+            { titulo: "Naruto", imagen: "https://cdng.europosters.eu/pod_public/750/229900.jpg", capitulos: [ { nombre: "Capítulo 1", url: "TU_ENLACE_AQUI" }, { nombre: "Capítulo 2", url: "TU_ENLACE_AQUI" } ] },
+            { titulo: "Jujutsu Kaisen", imagen: "https://m.media-amazon.com/images/I/81A2y1EW1QL._AC_SY879_.jpg", capitulos: [ { nombre: "Capítulo 1", url: "TU_ENLACE_AQUI" } ] },
+            { titulo: "Shingeki no Kyojin", imagen: "https://m.media-amazon.com/images/I/81xE+P8-L4L._AC_SY879_.jpg", capitulos: [] },
+            { titulo: "Kimetsu no Yaiba", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Demon+Slayer", capitulos: [] },
+            { titulo: "One Piece", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=One+Piece", capitulos: [] },
+            { titulo: "Chainsaw Man", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Chainsaw+Man", capitulos: [] },
+            { titulo: "Solo Leveling", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Solo+Leveling", capitulos: [] },
+            { titulo: "Boku no Hero", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=My+Hero+Academia", capitulos: [] },
+            { titulo: "Kaiju No. 8", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Kaiju+No.+8", capitulos: [] },
+            { titulo: "Spy x Family", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Spy+x+Family", capitulos: [] },
+            { titulo: "Hunter x Hunter", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Hunter+x+Hunter", capitulos: [] },
+            { titulo: "Bleach", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Bleach", capitulos: [] },
+            { titulo: "Death Note", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Death+Note", capitulos: [] },
+            { titulo: "Fullmetal Alchemist", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Fullmetal", capitulos: [] },
+            { titulo: "Tokyo Revengers", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Tokyo+Revengers", capitulos: [] },
+            { titulo: "Frieren", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Frieren", capitulos: [] },
+            { titulo: "Dragon Ball Super", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Dragon+Ball", capitulos: [] },
+            { titulo: "Cyberpunk Edgerunners", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Cyberpunk", capitulos: [] },
+            { titulo: "Vinland Saga", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Vinland+Saga", capitulos: [] },
+            { titulo: "Mashle", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Mashle", capitulos: [] }
         ];
 
+        // MANGAS (20)
         const mangas = [
-            { 
-                titulo: "Berserk", 
-                imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Berserk",
-                capitulos: [
-                    { nombre: "Volumen 1", url: "https://link-manga.com/berserk-1" },
-                    { nombre: "Volumen 2", url: "https://link-manga.com/berserk-2" }
-                ]
-            }
+            { titulo: "Berserk", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Berserk", capitulos: [ { nombre: "Tomo 1", url: "TU_ENLACE_AQUI" } ] },
+            { titulo: "Vagabond", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Vagabond", capitulos: [] },
+            { titulo: "Monster", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Monster", capitulos: [] },
+            { titulo: "Oyasumi Punpun", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Oyasumi+Punpun", capitulos: [] },
+            { titulo: "Tokyo Ghoul", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Tokyo+Ghoul", capitulos: [] },
+            { titulo: "One Punch Man", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=One+Punch+Man", capitulos: [] },
+            { titulo: "Blue Lock", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Blue+Lock", capitulos: [] },
+            { titulo: "Dandadan", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Dandadan", capitulos: [] },
+            { titulo: "Sakamoto Days", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Sakamoto+Days", capitulos: [] },
+            { titulo: "Kagurabachi", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Kagurabachi", capitulos: [] },
+            { titulo: "Oshi no Ko", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Oshi+no+Ko", capitulos: [] },
+            { titulo: "Haikyuu!!", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Haikyuu!!", capitulos: [] },
+            { titulo: "JoJo's Bizarre Adv.", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=JoJo's", capitulos: [] },
+            { titulo: "20th Century Boys", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=20th+Century", capitulos: [] },
+            { titulo: "Gantz", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Gantz", capitulos: [] },
+            { titulo: "Uzumaki", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Uzumaki", capitulos: [] },
+            { titulo: "Choujin X", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Choujin+X", capitulos: [] },
+            { titulo: "Black Clover", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Black+Clover", capitulos: [] },
+            { titulo: "Record of Ragnarok", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Ragnarok", capitulos: [] },
+            { titulo: "Boruto: TBV", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Boruto", capitulos: [] }
         ];
 
+        // NOVELAS (20)
         const novelas = [
-            { 
-                titulo: "Classroom of the Elite", 
-                imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Classroom+Elite",
-                capitulos: [
-                    { nombre: "Volumen 1 (Leer)", url: "https://link-novela.com/cote-1" }
-                ]
-            }
+            { titulo: "Classroom of the Elite", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Classroom+Elite", capitulos: [ { nombre: "Volumen 1", url: "TU_ENLACE_AQUI" } ] },
+            { titulo: "Mushoku Tensei", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Mushoku+Tensei", capitulos: [] },
+            { titulo: "Re:Zero", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Re:Zero", capitulos: [] },
+            { titulo: "Overlord", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Overlord", capitulos: [] },
+            { titulo: "No Game No Life", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=NGNL", capitulos: [] },
+            { titulo: "Sword Art Online", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=SAO", capitulos: [] },
+            { titulo: "Tensei Slime", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=TenSura", capitulos: [] },
+            { titulo: "Monogatari Series", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Monogatari", capitulos: [] },
+            { titulo: "86 -Eighty Six-", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=86", capitulos: [] },
+            { titulo: "Konosuba", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Konosuba", capitulos: [] },
+            { titulo: "Shield Hero", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Shield+Hero", capitulos: [] },
+            { titulo: "Spice and Wolf", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Spice+and+Wolf", capitulos: [] },
+            { titulo: "Violet Evergarden", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Violet+Evergarden", capitulos: [] },
+            { titulo: "Date A Live", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Date+A+Live", capitulos: [] },
+            { titulo: "Toradora!", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Toradora!", capitulos: [] },
+            { titulo: "Toaru Majutsu no Index", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Index", capitulos: [] },
+            { titulo: "DanMachi", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=DanMachi", capitulos: [] },
+            { titulo: "Youjo Senki", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Youjo+Senki", capitulos: [] },
+            { titulo: "Grimgar of Fantasy", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Grimgar", capitulos: [] },
+            { titulo: "Goblin Slayer", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Goblin+Slayer", capitulos: [] }
         ];
 
-        // FUNCIÓN PARA DIBUJAR LAS TARJETAS
         function mostrarTarjetas(lista, contenedorId) {
             const contenedor = document.getElementById(contenedorId);
             let contenidoHtml = '';
             
-            lista.forEach((item, index) => {
-                // Convertimos el objeto a un texto para poder enviarlo al hacer clic
+            lista.forEach((item) => {
                 const itemData = encodeURIComponent(JSON.stringify(item));
                 
                 contenidoHtml += `
@@ -310,18 +333,16 @@
             contenedor.innerHTML = contenidoHtml;
         }
 
-        // FUNCIONES DE LA VENTANA EMERGENTE (MODAL)
         function abrirModal(itemDataTexto) {
             const item = JSON.parse(decodeURIComponent(itemDataTexto));
             
             document.getElementById('modal-title').textContent = item.titulo;
             
             const chapterList = document.getElementById('chapter-list');
-            chapterList.innerHTML = ''; // Limpiar capítulos anteriores
+            chapterList.innerHTML = ''; 
 
             if (item.capitulos && item.capitulos.length > 0) {
                 item.capitulos.forEach(cap => {
-                    // target="_blank" hace que el enlace se abra en una pestaña nueva
                     chapterList.innerHTML += `
                         <a href="${cap.url}" target="_blank" class="chapter-btn">${cap.nombre}</a>
                     `;
@@ -337,7 +358,6 @@
             document.getElementById('chapter-modal').style.display = 'none';
         }
 
-        // Cerrar ventana si se hace clic afuera del recuadro
         window.onclick = function(event) {
             const modal = document.getElementById('chapter-modal');
             if (event.target == modal) {
@@ -345,7 +365,6 @@
             }
         }
 
-        // CARGAR LAS SECCIONES
         mostrarTarjetas(animes, 'grid-animes');
         mostrarTarjetas(mangas, 'grid-mangas');
         mostrarTarjetas(novelas, 'grid-novelas');
