@@ -47,7 +47,7 @@
             color: #ffffff;
         }
 
-        /* Descripción Principal de la Página */
+        /* Descripción Principal */
         .site-description {
             background-color: #1e1e1e;
             text-align: center;
@@ -99,7 +99,7 @@
             gap: 25px;
         }
 
-        /* Tarjetas */
+        /* Tarjetas (Portadas) */
         .card {
             background-color: #1e1e1e;
             border-radius: 10px;
@@ -133,7 +133,7 @@
             text-overflow: ellipsis;
         }
 
-        /* VENTANA EMERGENTE (MODAL) PARA CAPÍTULOS */
+        /* VENTANA EMERGENTE (MODAL) REDISEÑADA */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -141,22 +141,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.85);
             z-index: 1000;
             justify-content: center;
             align-items: center;
         }
 
         .modal-content {
-            background-color: #1e1e1e;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
+            /* El fondo se inyectará dinámicamente con JavaScript */
+            background-size: cover;
+            background-position: center;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
             width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
+            text-align: center;
             border: 2px solid #6c5ce7;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
         .close-btn {
@@ -168,35 +170,41 @@
             cursor: pointer;
             background: none;
             border: none;
+            z-index: 10;
         }
 
         .modal-title {
             margin-top: 0;
-            color: #6c5ce7;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
+            color: #ffffff;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 20px;
         }
 
-        .chapter-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
+        .modal-description {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            margin-bottom: 30px;
         }
 
-        .chapter-btn {
-            background-color: #2d2d2d;
-            color: #fff;
-            padding: 12px;
+        /* EL BOTÓN MÁGICO */
+        .btn-magico {
+            display: inline-block;
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
             text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
-            transition: background-color 0.2s;
-            border: 1px solid #444;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .chapter-btn:hover {
-            background-color: #6c5ce7;
+        .btn-magico:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.8);
         }
     </style>
 </head>
@@ -213,7 +221,7 @@
 
     <div class="site-description">
         <p>Esta página está hecha para que los amantes del anime, manga y novela ligera puedan seguir lo que les gusta.</p>
-        <span>(Esta página te redireccionará al anime, novela y manga que tú quieras ver)</span>
+        <span>(Esta página te redireccionará al anime, novela o manga que tú quieras ver)</span>
     </div>
 
     <div class="container">
@@ -233,88 +241,59 @@
         </section>
     </div>
 
+    <!-- ESTRUCTURA DE LA VENTANA EMERGENTE -->
     <div class="modal-overlay" id="chapter-modal">
-        <div class="modal-content">
+        <div class="modal-content" id="modal-box">
             <button class="close-btn" onclick="cerrarModal()">✖</button>
             <h2 class="modal-title" id="modal-title">Título</h2>
-            <div class="chapter-list" id="chapter-list">
-            </div>
+            <p class="modal-description" id="modal-description">Con este enlace podrá encontrar la serie en su totalidad.</p>
+            <a href="#" target="_blank" class="btn-magico" id="modal-button">Ver Serie Completa</a>
         </div>
     </div>
 
     <script>
-        // ANIMES (20)
+        // --- BASE DE DATOS ---
+        // Fíjate en cómo Naruto tiene 'imagen' (portada) y 'fondoModal' (el wallpaper que saldrá en la ventana)
+        
         const animes = [
-            { titulo: "Naruto", imagen: "https://cdng.europosters.eu/pod_public/750/229900.jpg", capitulos: [ { nombre: "Capítulo 1", url: "TU_ENLACE_AQUI" }, { nombre: "Capítulo 2", url: "TU_ENLACE_AQUI" } ] },
-            { titulo: "Jujutsu Kaisen", imagen: "https://m.media-amazon.com/images/I/81A2y1EW1QL._AC_SY879_.jpg", capitulos: [ { nombre: "Capítulo 1", url: "TU_ENLACE_AQUI" } ] },
-            { titulo: "Shingeki no Kyojin", imagen: "https://m.media-amazon.com/images/I/81xE+P8-L4L._AC_SY879_.jpg", capitulos: [] },
-            { titulo: "Kimetsu no Yaiba", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Demon+Slayer", capitulos: [] },
-            { titulo: "One Piece", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=One+Piece", capitulos: [] },
-            { titulo: "Chainsaw Man", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Chainsaw+Man", capitulos: [] },
-            { titulo: "Solo Leveling", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Solo+Leveling", capitulos: [] },
-            { titulo: "Boku no Hero", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=My+Hero+Academia", capitulos: [] },
-            { titulo: "Kaiju No. 8", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Kaiju+No.+8", capitulos: [] },
-            { titulo: "Spy x Family", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Spy+x+Family", capitulos: [] },
-            { titulo: "Hunter x Hunter", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Hunter+x+Hunter", capitulos: [] },
-            { titulo: "Bleach", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Bleach", capitulos: [] },
-            { titulo: "Death Note", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Death+Note", capitulos: [] },
-            { titulo: "Fullmetal Alchemist", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Fullmetal", capitulos: [] },
-            { titulo: "Tokyo Revengers", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Tokyo+Revengers", capitulos: [] },
-            { titulo: "Frieren", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Frieren", capitulos: [] },
-            { titulo: "Dragon Ball Super", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Dragon+Ball", capitulos: [] },
-            { titulo: "Cyberpunk Edgerunners", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Cyberpunk", capitulos: [] },
-            { titulo: "Vinland Saga", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Vinland+Saga", capitulos: [] },
-            { titulo: "Mashle", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Mashle", capitulos: [] }
+            { 
+                titulo: "Naruto", 
+                imagen: "https://cdng.europosters.eu/pod_public/750/229900.jpg", 
+                fondoModal: "https://i.pinimg.com/originals/c7/28/99/c728994784a51e6ba7c6536cb4e5f762.jpg", // ¡Este es un fondo de Kurama!
+                enlaceTotal: "https://www.crunchyroll.com/es/naruto" 
+            },
+            { 
+                titulo: "Jujutsu Kaisen", 
+                imagen: "https://m.media-amazon.com/images/I/81A2y1EW1QL._AC_SY879_.jpg", 
+                fondoModal: "https://i.pinimg.com/originals/1e/8d/dc/1e8ddcf5a2307efcf2fcc9b584a0d922.jpg", 
+                enlaceTotal: "TU_ENLACE_AQUI" 
+            },
+            { titulo: "Shingeki no Kyojin", imagen: "https://m.media-amazon.com/images/I/81xE+P8-L4L._AC_SY879_.jpg", fondoModal: "https://placehold.co/800x400/2d2d2d/6c5ce7?text=Fondo+Shingeki", enlaceTotal: "TU_ENLACE_AQUI" },
+            { titulo: "Kimetsu no Yaiba", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Demon+Slayer", fondoModal: "https://placehold.co/800x400/2d2d2d/6c5ce7?text=Fondo", enlaceTotal: "TU_ENLACE_AQUI" }
+            // Puedes seguir agregando el resto de tus animes copiando este mismo formato...
         ];
 
-        // MANGAS (20)
         const mangas = [
-            { titulo: "Berserk", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Berserk", capitulos: [ { nombre: "Tomo 1", url: "TU_ENLACE_AQUI" } ] },
-            { titulo: "Vagabond", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Vagabond", capitulos: [] },
-            { titulo: "Monster", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Monster", capitulos: [] },
-            { titulo: "Oyasumi Punpun", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Oyasumi+Punpun", capitulos: [] },
-            { titulo: "Tokyo Ghoul", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Tokyo+Ghoul", capitulos: [] },
-            { titulo: "One Punch Man", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=One+Punch+Man", capitulos: [] },
-            { titulo: "Blue Lock", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Blue+Lock", capitulos: [] },
-            { titulo: "Dandadan", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Dandadan", capitulos: [] },
-            { titulo: "Sakamoto Days", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Sakamoto+Days", capitulos: [] },
-            { titulo: "Kagurabachi", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Kagurabachi", capitulos: [] },
-            { titulo: "Oshi no Ko", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Oshi+no+Ko", capitulos: [] },
-            { titulo: "Haikyuu!!", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Haikyuu!!", capitulos: [] },
-            { titulo: "JoJo's Bizarre Adv.", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=JoJo's", capitulos: [] },
-            { titulo: "20th Century Boys", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=20th+Century", capitulos: [] },
-            { titulo: "Gantz", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Gantz", capitulos: [] },
-            { titulo: "Uzumaki", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Uzumaki", capitulos: [] },
-            { titulo: "Choujin X", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Choujin+X", capitulos: [] },
-            { titulo: "Black Clover", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Black+Clover", capitulos: [] },
-            { titulo: "Record of Ragnarok", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Ragnarok", capitulos: [] },
-            { titulo: "Boruto: TBV", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Boruto", capitulos: [] }
+            { 
+                titulo: "Berserk", 
+                imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Berserk", 
+                fondoModal: "https://placehold.co/800x400/2d2d2d/a29bfe?text=Fondo+Berserk", 
+                enlaceTotal: "TU_ENLACE_AQUI" 
+            }
+            // Agrega tus mangas aquí...
         ];
 
-        // NOVELAS (20)
         const novelas = [
-            { titulo: "Classroom of the Elite", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Classroom+Elite", capitulos: [ { nombre: "Volumen 1", url: "TU_ENLACE_AQUI" } ] },
-            { titulo: "Mushoku Tensei", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Mushoku+Tensei", capitulos: [] },
-            { titulo: "Re:Zero", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Re:Zero", capitulos: [] },
-            { titulo: "Overlord", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Overlord", capitulos: [] },
-            { titulo: "No Game No Life", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=NGNL", capitulos: [] },
-            { titulo: "Sword Art Online", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=SAO", capitulos: [] },
-            { titulo: "Tensei Slime", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=TenSura", capitulos: [] },
-            { titulo: "Monogatari Series", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Monogatari", capitulos: [] },
-            { titulo: "86 -Eighty Six-", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=86", capitulos: [] },
-            { titulo: "Konosuba", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Konosuba", capitulos: [] },
-            { titulo: "Shield Hero", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Shield+Hero", capitulos: [] },
-            { titulo: "Spice and Wolf", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Spice+and+Wolf", capitulos: [] },
-            { titulo: "Violet Evergarden", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Violet+Evergarden", capitulos: [] },
-            { titulo: "Date A Live", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Date+A+Live", capitulos: [] },
-            { titulo: "Toradora!", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Toradora!", capitulos: [] },
-            { titulo: "Toaru Majutsu no Index", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Index", capitulos: [] },
-            { titulo: "DanMachi", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=DanMachi", capitulos: [] },
-            { titulo: "Youjo Senki", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Youjo+Senki", capitulos: [] },
-            { titulo: "Grimgar of Fantasy", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Grimgar", capitulos: [] },
-            { titulo: "Goblin Slayer", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Goblin+Slayer", capitulos: [] }
+            { 
+                titulo: "Classroom of the Elite", 
+                imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Classroom+Elite", 
+                fondoModal: "https://placehold.co/800x400/2d2d2d/00b894?text=Fondo+Novela", 
+                enlaceTotal: "TU_ENLACE_AQUI" 
+            }
+            // Agrega tus novelas aquí...
         ];
 
+        // --- FUNCIONES DEL SISTEMA ---
         function mostrarTarjetas(lista, contenedorId) {
             const contenedor = document.getElementById(contenedorId);
             let contenidoHtml = '';
@@ -335,22 +314,30 @@
 
         function abrirModal(itemDataTexto) {
             const item = JSON.parse(decodeURIComponent(itemDataTexto));
+            const modalBox = document.getElementById('modal-box');
+            const botonEnlace = document.getElementById('modal-button');
+            const descripcion = document.getElementById('modal-description');
             
+            // 1. Poner el título
             document.getElementById('modal-title').textContent = item.titulo;
             
-            const chapterList = document.getElementById('chapter-list');
-            chapterList.innerHTML = ''; 
+            // 2. Personalizar el texto descriptivo
+            descripcion.textContent = `Con este enlace podrá encontrar ${item.titulo} en su totalidad.`;
 
-            if (item.capitulos && item.capitulos.length > 0) {
-                item.capitulos.forEach(cap => {
-                    chapterList.innerHTML += `
-                        <a href="${cap.url}" target="_blank" class="chapter-btn">${cap.nombre}</a>
-                    `;
-                });
+            // 3. Poner el enlace en el botón
+            if(item.enlaceTotal && item.enlaceTotal !== "TU_ENLACE_AQUI") {
+                botonEnlace.href = item.enlaceTotal;
+                botonEnlace.style.display = 'inline-block';
+                botonEnlace.textContent = `Ver ${item.titulo} Completo`;
             } else {
-                chapterList.innerHTML = '<p style="color: #ccc; text-align: center;">Próximamente agregaremos enlaces...</p>';
+                botonEnlace.style.display = 'none';
+                descripcion.textContent = `Próximamente agregaremos el enlace para ${item.titulo}...`;
             }
+            
+            // 4. Cambiar el fondo dinámicamente con un filtro oscuro encima para leer el texto
+            modalBox.style.backgroundImage = `linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.85)), url('${item.fondoModal}')`;
 
+            // 5. Mostrar la ventana
             document.getElementById('chapter-modal').style.display = 'flex';
         }
 
