@@ -8,32 +8,27 @@
         /* Diseño General */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
+            background-color: #0f0f0f;
             color: #ffffff;
             margin: 0;
             padding: 0;
             scroll-behavior: smooth;
         }
 
-        /* Barra de Navegación */
+        /* BARRA DE NAVEGACIÓN Y DESCRIPCIÓN */
         header {
-            background-color: #1a1a1a;
+            background-color: #141414;
             padding: 20px;
             text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 50;
             border-bottom: 2px solid #6c5ce7;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
-
         header h1 {
             margin: 0 0 15px 0;
             color: #6c5ce7;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-
         nav a {
             color: #a29bfe;
             text-decoration: none;
@@ -42,316 +37,264 @@
             font-weight: bold;
             transition: color 0.3s;
         }
+        nav a:hover { color: #ffffff; }
 
-        nav a:hover {
-            color: #ffffff;
-        }
-
-        /* Descripción Principal */
         .site-description {
-            background-color: #1e1e1e;
+            background-color: #1a1a1a;
             text-align: center;
             padding: 30px 20px;
-            border-bottom: 1px solid #333;
         }
+        .site-description p { margin: 0 auto; font-size: 1.2rem; color: #dfe6e9; max-width: 800px; }
+        .site-description span { display: block; margin-top: 10px; font-size: 0.95rem; color: #a29bfe; font-style: italic; }
 
-        .site-description p {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #dfe6e9;
+        /* VISTA PRINCIPAL (EL CATÁLOGO) */
+        #vista-principal {
+            display: block; /* Se muestra por defecto */
         }
-
-        .site-description span {
-            display: block;
-            margin-top: 10px;
-            font-size: 0.95rem;
-            color: #a29bfe;
-            font-style: italic;
-        }
-
-        /* Contenedor Principal */
+        
         .container {
             max-width: 1300px;
             margin: 0 auto;
             padding: 20px;
         }
+        section { padding-top: 40px; margin-bottom: 60px; }
+        h2 { border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 30px; font-size: 2rem; }
 
-        section {
-            padding-top: 60px;
-            margin-bottom: 60px;
-            min-height: 50vh;
-        }
-
-        h2 {
-            border-bottom: 2px solid #4a4a4a;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-            font-size: 2rem;
-            color: #e0e0e0;
-        }
-
-        /* Sistema de Cuadrícula */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 25px;
         }
-
-        /* Tarjetas (Portadas) */
         .card {
             background-color: #1e1e1e;
             border-radius: 10px;
             overflow: hidden;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #333;
+            border: 1px solid #2a2a2a;
             cursor: pointer;
         }
-
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 15px rgba(108, 92, 231, 0.4);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
             border-color: #6c5ce7;
         }
+        .card img { width: 100%; height: 280px; object-fit: cover; }
+        .card h3 { padding: 12px; margin: 0; font-size: 1rem; color: #dfe6e9; }
 
-        .card img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            background-color: #2d2d2d;
-        }
-
-        .card h3 {
-            padding: 12px;
-            margin: 0;
-            font-size: 1rem;
-            color: #dfe6e9;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* VENTANA EMERGENTE (MODAL) REDISEÑADA */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            /* El fondo se inyectará dinámicamente con JavaScript */
+        /* VISTA DE DETALLE (LA NUEVA PÁGINA CON FONDO ANIMADO) */
+        #vista-detalle {
+            display: none; /* Oculta por defecto */
+            min-height: 100vh;
             background-size: cover;
             background-position: center;
-            padding: 40px;
-            border-radius: 15px;
-            max-width: 600px;
-            width: 90%;
-            text-align: center;
-            border: 2px solid #6c5ce7;
+            background-attachment: fixed; /* Hace que el fondo se vea más cinemático */
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            animation: fadeIn 0.5s ease-in-out;
         }
 
-        .close-btn {
+        /* Filtro oscuro encima del GIF para que el texto resalte */
+        .detalle-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.9) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .btn-volver {
             position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.5rem;
+            top: 30px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.1);
             color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            border-radius: 30px;
             cursor: pointer;
-            background: none;
-            border: none;
-            z-index: 10;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .btn-volver:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.05);
         }
 
-        .modal-title {
-            margin-top: 0;
+        .detalle-titulo {
+            font-size: 5rem;
             color: #ffffff;
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(108, 92, 231, 0.8), 0 0 40px rgba(0,0,0,1);
+            margin: 0 0 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
-        .modal-description {
-            font-size: 1.2rem;
+        .detalle-desc {
+            font-size: 1.5rem;
             color: #e0e0e0;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,1);
+            max-width: 700px;
+            margin-bottom: 40px;
+            line-height: 1.5;
         }
 
-        /* EL BOTÓN MÁGICO */
         .btn-magico {
             display: inline-block;
             background: linear-gradient(45deg, #6c5ce7, #a29bfe);
             color: white;
-            padding: 15px 30px;
-            font-size: 1.2rem;
+            padding: 18px 40px;
+            font-size: 1.3rem;
             font-weight: bold;
             text-decoration: none;
             border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.6);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-magico:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(108, 92, 231, 0.9);
         }
 
-        .btn-magico:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.8);
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Mi Universo Otaku</h1>
-        <nav>
-            <a href="#animes">Animes</a>
-            <a href="#mangas">Mangas</a>
-            <a href="#novelas">Novelas Ligeras</a>
-        </nav>
-    </header>
+    <!-- VISTA PRINCIPAL (Catálogo) -->
+    <div id="vista-principal">
+        <header>
+            <h1>Mi Universo Otaku</h1>
+            <nav>
+                <a href="#animes">Animes</a>
+                <a href="#mangas">Mangas</a>
+                <a href="#novelas">Novelas Ligeras</a>
+            </nav>
+        </header>
 
-    <div class="site-description">
-        <p>Esta página está hecha para que los amantes del anime, manga y novela ligera puedan seguir lo que les gusta.</p>
-        <span>(Esta página te redireccionará al anime, novela o manga que tú quieras ver)</span>
+        <div class="site-description">
+            <p>Esta página está hecha para que los amantes del anime, manga y novela ligera puedan seguir lo que les gusta.</p>
+            <span>(Esta página te redireccionará al anime, novela o manga que tú quieras ver)</span>
+        </div>
+
+        <div class="container">
+            <section id="animes">
+                <h2>Animes</h2>
+                <div class="grid" id="grid-animes"></div>
+            </section>
+            <section id="mangas">
+                <h2>Mangas</h2>
+                <div class="grid" id="grid-mangas"></div>
+            </section>
+            <section id="novelas">
+                <h2>Novelas Ligeras</h2>
+                <div class="grid" id="grid-novelas"></div>
+            </section>
+        </div>
     </div>
 
-    <div class="container">
-        <section id="animes">
-            <h2>Animes</h2>
-            <div class="grid" id="grid-animes"></div>
-        </section>
-
-        <section id="mangas">
-            <h2>Mangas</h2>
-            <div class="grid" id="grid-mangas"></div>
-        </section>
-
-        <section id="novelas">
-            <h2>Novelas Ligeras</h2>
-            <div class="grid" id="grid-novelas"></div>
-        </section>
-    </div>
-
-    <!-- ESTRUCTURA DE LA VENTANA EMERGENTE -->
-    <div class="modal-overlay" id="chapter-modal">
-        <div class="modal-content" id="modal-box">
-            <button class="close-btn" onclick="cerrarModal()">✖</button>
-            <h2 class="modal-title" id="modal-title">Título</h2>
-            <p class="modal-description" id="modal-description">Con este enlace podrá encontrar la serie en su totalidad.</p>
-            <a href="#" target="_blank" class="btn-magico" id="modal-button">Ver Serie Completa</a>
+    <!-- NUEVA VISTA DE DETALLE (Se abre al hacer clic) -->
+    <div id="vista-detalle">
+        <div class="detalle-overlay">
+            <button class="btn-volver" onclick="volverAlCatalogo()">⬅ Volver al inicio</button>
+            <h2 class="detalle-titulo" id="detalle-titulo">Título</h2>
+            <p class="detalle-desc" id="detalle-desc">Descripción...</p>
+            <a href="#" target="_blank" class="btn-magico" id="detalle-btn">Ver Serie Completa</a>
         </div>
     </div>
 
     <script>
         // --- BASE DE DATOS ---
-        // Fíjate en cómo Naruto tiene 'imagen' (portada) y 'fondoModal' (el wallpaper que saldrá en la ventana)
+        // Ahora usamos "fondoAnimado" donde puedes pegar enlaces de GIFs (.gif)
         
         const animes = [
             { 
                 titulo: "Naruto", 
                 imagen: "https://cdng.europosters.eu/pod_public/750/229900.jpg", 
-                fondoModal: "https://i.pinimg.com/originals/c7/28/99/c728994784a51e6ba7c6536cb4e5f762.jpg", // ¡Este es un fondo de Kurama!
+                fondoAnimado: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWp3d2hlcXhqcWtkbnc4aW1sdGtzYzc1cmQxZWJ0amhwZnFpMTIzbSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2y98KScHKeaQM/giphy.gif", // ¡GIF DE KURAMA!
                 enlaceTotal: "https://www.crunchyroll.com/es/naruto" 
             },
             { 
                 titulo: "Jujutsu Kaisen", 
                 imagen: "https://m.media-amazon.com/images/I/81A2y1EW1QL._AC_SY879_.jpg", 
-                fondoModal: "https://i.pinimg.com/originals/1e/8d/dc/1e8ddcf5a2307efcf2fcc9b584a0d922.jpg", 
+                fondoAnimado: "https://media.giphy.com/media/TNtON2DPeZHOwV3hOU/giphy.gif", // GIF de Gojo
                 enlaceTotal: "TU_ENLACE_AQUI" 
             },
-            { titulo: "Shingeki no Kyojin", imagen: "https://m.media-amazon.com/images/I/81xE+P8-L4L._AC_SY879_.jpg", fondoModal: "https://placehold.co/800x400/2d2d2d/6c5ce7?text=Fondo+Shingeki", enlaceTotal: "TU_ENLACE_AQUI" },
-            { titulo: "Kimetsu no Yaiba", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Demon+Slayer", fondoModal: "https://placehold.co/800x400/2d2d2d/6c5ce7?text=Fondo", enlaceTotal: "TU_ENLACE_AQUI" }
-            // Puedes seguir agregando el resto de tus animes copiando este mismo formato...
+            { titulo: "Shingeki no Kyojin", imagen: "https://m.media-amazon.com/images/I/81xE+P8-L4L._AC_SY879_.jpg", fondoAnimado: "https://placehold.co/1920x1080/2d2d2d/6c5ce7?text=Fondo", enlaceTotal: "TU_ENLACE_AQUI" },
+            { titulo: "Kimetsu no Yaiba", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Demon+Slayer", fondoAnimado: "https://placehold.co/1920x1080/2d2d2d/6c5ce7?text=Fondo", enlaceTotal: "TU_ENLACE_AQUI" }
         ];
 
         const mangas = [
-            { 
-                titulo: "Berserk", 
-                imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Berserk", 
-                fondoModal: "https://placehold.co/800x400/2d2d2d/a29bfe?text=Fondo+Berserk", 
-                enlaceTotal: "TU_ENLACE_AQUI" 
-            }
-            // Agrega tus mangas aquí...
+            { titulo: "Berserk", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Berserk", fondoAnimado: "https://placehold.co/1920x1080/2d2d2d/a29bfe?text=Fondo", enlaceTotal: "TU_ENLACE_AQUI" }
         ];
 
         const novelas = [
-            { 
-                titulo: "Classroom of the Elite", 
-                imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Classroom+Elite", 
-                fondoModal: "https://placehold.co/800x400/2d2d2d/00b894?text=Fondo+Novela", 
-                enlaceTotal: "TU_ENLACE_AQUI" 
-            }
-            // Agrega tus novelas aquí...
+            { titulo: "Classroom of the Elite", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Classroom+Elite", fondoAnimado: "https://placehold.co/1920x1080/2d2d2d/00b894?text=Fondo", enlaceTotal: "TU_ENLACE_AQUI" }
         ];
 
-        // --- FUNCIONES DEL SISTEMA ---
+        // --- SISTEMA PARA CAMBIAR DE PANTALLA ---
         function mostrarTarjetas(lista, contenedorId) {
             const contenedor = document.getElementById(contenedorId);
             let contenidoHtml = '';
             
             lista.forEach((item) => {
                 const itemData = encodeURIComponent(JSON.stringify(item));
-                
                 contenidoHtml += `
-                    <div class="card" onclick="abrirModal('${itemData}')">
+                    <div class="card" onclick="abrirDetalle('${itemData}')">
                         <img src="${item.imagen}" alt="${item.titulo}">
                         <h3>${item.titulo}</h3>
                     </div>
                 `;
             });
-            
             contenedor.innerHTML = contenidoHtml;
         }
 
-        function abrirModal(itemDataTexto) {
+        function abrirDetalle(itemDataTexto) {
             const item = JSON.parse(decodeURIComponent(itemDataTexto));
-            const modalBox = document.getElementById('modal-box');
-            const botonEnlace = document.getElementById('modal-button');
-            const descripcion = document.getElementById('modal-description');
             
-            // 1. Poner el título
-            document.getElementById('modal-title').textContent = item.titulo;
+            // 1. Ocultar el catálogo y mostrar la nueva sección
+            document.getElementById('vista-principal').style.display = 'none';
+            document.getElementById('vista-detalle').style.display = 'block';
             
-            // 2. Personalizar el texto descriptivo
-            descripcion.textContent = `Con este enlace podrá encontrar ${item.titulo} en su totalidad.`;
+            // 2. Subir automáticamente hasta arriba
+            window.scrollTo(0, 0);
 
-            // 3. Poner el enlace en el botón
+            // 3. Poner el fondo animado y el título
+            document.getElementById('vista-detalle').style.backgroundImage = `url('${item.fondoAnimado}')`;
+            document.getElementById('detalle-titulo').textContent = item.titulo;
+            
+            const btnEnlace = document.getElementById('detalle-btn');
+            const desc = document.getElementById('detalle-desc');
+
+            // 4. Configurar el botón mágico
             if(item.enlaceTotal && item.enlaceTotal !== "TU_ENLACE_AQUI") {
-                botonEnlace.href = item.enlaceTotal;
-                botonEnlace.style.display = 'inline-block';
-                botonEnlace.textContent = `Ver ${item.titulo} Completo`;
+                desc.textContent = `Con este enlace podrás encontrar ${item.titulo} en su totalidad para disfrutar de todos sus capítulos y temporadas.`;
+                btnEnlace.href = item.enlaceTotal;
+                btnEnlace.style.display = 'inline-block';
+                btnEnlace.textContent = `▶ Ver ${item.titulo}`;
             } else {
-                botonEnlace.style.display = 'none';
-                descripcion.textContent = `Próximamente agregaremos el enlace para ${item.titulo}...`;
-            }
-            
-            // 4. Cambiar el fondo dinámicamente con un filtro oscuro encima para leer el texto
-            modalBox.style.backgroundImage = `linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.85)), url('${item.fondoModal}')`;
-
-            // 5. Mostrar la ventana
-            document.getElementById('chapter-modal').style.display = 'flex';
-        }
-
-        function cerrarModal() {
-            document.getElementById('chapter-modal').style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('chapter-modal');
-            if (event.target == modal) {
-                modal.style.display = "none";
+                desc.textContent = `Próximamente agregaremos el enlace oficial para ${item.titulo}...`;
+                btnEnlace.style.display = 'none';
             }
         }
 
+        function volverAlCatalogo() {
+            // Regresar todo a la normalidad
+            document.getElementById('vista-detalle').style.display = 'none';
+            document.getElementById('vista-principal').style.display = 'block';
+        }
+
+        // Cargar todo
         mostrarTarjetas(animes, 'grid-animes');
         mostrarTarjetas(mangas, 'grid-mangas');
         mostrarTarjetas(novelas, 'grid-novelas');
