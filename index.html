@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Biblioteca Otaku</title>
     <style>
-        /* Diseño General (Modo Oscuro) */
+        /* Diseño General */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #121212;
@@ -15,14 +15,14 @@
             scroll-behavior: smooth;
         }
 
-        /* Barra de Navegación Fija */
+        /* Barra de Navegación */
         header {
             background-color: #1a1a1a;
             padding: 20px;
             text-align: center;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 50; /* Cambiado a 50 para que el modal quede por encima */
             border-bottom: 2px solid #6c5ce7;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
@@ -47,6 +47,30 @@
             color: #ffffff;
         }
 
+        /* Descripción Principal de la Página */
+        .site-description {
+            background-color: #1e1e1e;
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .site-description p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #dfe6e9;
+        }
+
+        .site-description span {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: #a29bfe;
+            font-style: italic;
+        }
+
         /* Contenedor Principal */
         .container {
             max-width: 1300px;
@@ -55,7 +79,7 @@
         }
 
         section {
-            padding-top: 100px;
+            padding-top: 60px;
             margin-bottom: 60px;
             min-height: 50vh;
         }
@@ -68,14 +92,14 @@
             color: #e0e0e0;
         }
 
-        /* Sistema de Cuadrícula Automático */
+        /* Sistema de Cuadrícula */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 25px;
         }
 
-        /* Tarjetas de cada serie */
+        /* Tarjetas */
         .card {
             background-color: #1e1e1e;
             border-radius: 10px;
@@ -108,6 +132,72 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        /* VENTANA EMERGENTE (MODAL) PARA CAPÍTULOS */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 2px solid #6c5ce7;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #fff;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .modal-title {
+            margin-top: 0;
+            color: #6c5ce7;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .chapter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .chapter-btn {
+            background-color: #2d2d2d;
+            color: #fff;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.2s;
+            border: 1px solid #444;
+        }
+
+        .chapter-btn:hover {
+            background-color: #6c5ce7;
+        }
     </style>
 </head>
 <body>
@@ -120,6 +210,12 @@
             <a href="#novelas">Novelas Ligeras</a>
         </nav>
     </header>
+
+    <!-- DESCRIPCIÓN DE LA PÁGINA -->
+    <div class="site-description">
+        <p>Esta página está hecha para que los amantes del anime, manga y novela ligera puedan seguir lo que les gusta.</p>
+        <span>(Esta página te redireccionará al anime, novela y manga que tú quieras ver)</span>
+    </div>
 
     <div class="container">
         <section id="animes">
@@ -138,88 +234,73 @@
         </section>
     </div>
 
-    <!-- SCRIPT PARA CARGAR LOS DATOS DINÁMICAMENTE -->
+    <!-- ESTRUCTURA OCULTA DE LA VENTANA EMERGENTE -->
+    <div class="modal-overlay" id="chapter-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="cerrarModal()">✖</button>
+            <h2 class="modal-title" id="modal-title">Título</h2>
+            <div class="chapter-list" id="chapter-list">
+                <!-- Los botones de los capítulos aparecerán aquí -->
+            </div>
+        </div>
+    </div>
+
     <script>
-        // BASE DE DATOS DE ANIMES
+        // BASE DE DATOS (AQUÍ AGREGAS LOS ENLACES A OTRAS PÁGINAS)
+        
         const animes = [
-            { titulo: "Naruto", imagen: "https://cdng.europosters.eu/pod_public/750/229900.jpg" },
-            { titulo: "Jujutsu Kaisen", imagen: "https://www.ifema.es/img/xl/manga-jujutsu-kaisen/manga-jujutsu-kaisen.jpeg" },
-            { titulo: "Shingeki no Kyojin", imagen: "https://m.media-amazon.com/images/I/71uHZO5ChkL._AC_UF894,1000_QL80_.jpg" },
-            { titulo: "Kimetsu no Yaiba", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Demon+Slayer" },
-            { titulo: "One Piece", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=One+Piece" },
-            { titulo: "Chainsaw Man", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Chainsaw+Man" },
-            { titulo: "Solo Leveling", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Solo+Leveling" },
-            { titulo: "Boku no Hero", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=My+Hero+Academia" },
-            { titulo: "Kaiju No. 8", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Kaiju+No.+8" },
-            { titulo: "Spy x Family", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Spy+x+Family" },
-            { titulo: "Hunter x Hunter", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Hunter+x+Hunter" },
-            { titulo: "Bleach", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Bleach" },
-            { titulo: "Death Note", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Death+Note" },
-            { titulo: "Fullmetal Alchemist", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Fullmetal" },
-            { titulo: "Tokyo Revengers", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Tokyo+Revengers" },
-            { titulo: "Frieren", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Frieren" },
-            { titulo: "Dragon Ball Super", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Dragon+Ball" },
-            { titulo: "Cyberpunk Edgerunners", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Cyberpunk" },
-            { titulo: "Vinland Saga", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Vinland+Saga" },
-            { titulo: "Mashle", imagen: "https://placehold.co/220x300/1e1e1e/6c5ce7?text=Mashle" }
+            { 
+                titulo: "Naruto", 
+                imagen: "https://cdng.europosters.eu/pod_public/750/229900.jpg",
+                capitulos: [
+                    { nombre: "Capítulo 1", url: "https://tu-pagina-externa.com/naruto-ep1" },
+                    { nombre: "Capítulo 2", url: "https://tu-pagina-externa.com/naruto-ep2" },
+                    { nombre: "Capítulo 3", url: "https://tu-pagina-externa.com/naruto-ep3" }
+                ]
+            },
+            { 
+                titulo: "Jujutsu Kaisen", 
+                imagen: "https://m.media-amazon.com/images/I/81A2y1EW1QL._AC_SY879_.jpg",
+                capitulos: [
+                    { nombre: "Temporada 1 - Cap 1", url: "https://link-a-jujutsu.com/cap1" },
+                    { nombre: "Temporada 1 - Cap 2", url: "https://link-a-jujutsu.com/cap2" }
+                ]
+            }
+            // Puedes seguir agregando más animes siguiendo este mismo formato...
         ];
 
-        // BASE DE DATOS DE MANGAS
         const mangas = [
-            { titulo: "Berserk", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Berserk" },
-            { titulo: "Vagabond", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Vagabond" },
-            { titulo: "Monster", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Monster" },
-            { titulo: "Oyasumi Punpun", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Oyasumi+Punpun" },
-            { titulo: "Tokyo Ghoul", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Tokyo+Ghoul" },
-            { titulo: "One Punch Man", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=One+Punch+Man" },
-            { titulo: "Blue Lock", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Blue+Lock" },
-            { titulo: "Dandadan", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Dandadan" },
-            { titulo: "Sakamoto Days", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Sakamoto+Days" },
-            { titulo: "Kagurabachi", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Kagurabachi" },
-            { titulo: "Oshi no Ko", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Oshi+no+Ko" },
-            { titulo: "Haikyuu!!", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Haikyuu!!" },
-            { titulo: "JoJo's Bizarre Adv.", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=JoJo's" },
-            { titulo: "20th Century Boys", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=20th+Century" },
-            { titulo: "Gantz", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Gantz" },
-            { titulo: "Uzumaki", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Uzumaki" },
-            { titulo: "Choujin X", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Choujin+X" },
-            { titulo: "Black Clover", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Black+Clover" },
-            { titulo: "Record of Ragnarok", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Ragnarok" },
-            { titulo: "Boruto: TBV", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Boruto" }
+            { 
+                titulo: "Berserk", 
+                imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Berserk",
+                capitulos: [
+                    { nombre: "Volumen 1", url: "https://link-manga.com/berserk-1" },
+                    { nombre: "Volumen 2", url: "https://link-manga.com/berserk-2" }
+                ]
+            }
         ];
 
-        // BASE DE DATOS DE NOVELAS LIGERAS
         const novelas = [
-            { titulo: "Classroom of the Elite", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Classroom+Elite" },
-            { titulo: "Mushoku Tensei", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Mushoku+Tensei" },
-            { titulo: "Re:Zero", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Re:Zero" },
-            { titulo: "Overlord", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Overlord" },
-            { titulo: "No Game No Life", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=NGNL" },
-            { titulo: "Sword Art Online", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=SAO" },
-            { titulo: "Tensei Slime", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=TenSura" },
-            { titulo: "Monogatari Series", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Monogatari" },
-            { titulo: "86 -Eighty Six-", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=86" },
-            { titulo: "Konosuba", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Konosuba" },
-            { titulo: "Shield Hero", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Shield+Hero" },
-            { titulo: "Spice and Wolf", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Spice+and+Wolf" },
-            { titulo: "Violet Evergarden", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Violet+Evergarden" },
-            { titulo: "Date A Live", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Date+A+Live" },
-            { titulo: "Toradora!", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Toradora!" },
-            { titulo: "Toaru Majutsu no Index", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Index" },
-            { titulo: "DanMachi", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=DanMachi" },
-            { titulo: "Youjo Senki", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Youjo+Senki" },
-            { titulo: "Grimgar of Fantasy", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Grimgar" },
-            { titulo: "Goblin Slayer", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Goblin+Slayer" }
+            { 
+                titulo: "Classroom of the Elite", 
+                imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Classroom+Elite",
+                capitulos: [
+                    { nombre: "Volumen 1 (Leer)", url: "https://link-novela.com/cote-1" }
+                ]
+            }
         ];
 
-        // FUNCIÓN QUE DIBUJA LAS TARJETAS EN LA PÁGINA
+        // FUNCIÓN PARA DIBUJAR LAS TARJETAS
         function mostrarTarjetas(lista, contenedorId) {
             const contenedor = document.getElementById(contenedorId);
             let contenidoHtml = '';
             
-            lista.forEach(item => {
+            lista.forEach((item, index) => {
+                // Convertimos el objeto a un texto para poder enviarlo al hacer clic
+                const itemData = encodeURIComponent(JSON.stringify(item));
+                
                 contenidoHtml += `
-                    <div class="card">
+                    <div class="card" onclick="abrirModal('${itemData}')">
                         <img src="${item.imagen}" alt="${item.titulo}">
                         <h3>${item.titulo}</h3>
                     </div>
@@ -229,7 +310,42 @@
             contenedor.innerHTML = contenidoHtml;
         }
 
-        // EJECUTAR LA FUNCIÓN PARA LAS 3 SECCIONES
+        // FUNCIONES DE LA VENTANA EMERGENTE (MODAL)
+        function abrirModal(itemDataTexto) {
+            const item = JSON.parse(decodeURIComponent(itemDataTexto));
+            
+            document.getElementById('modal-title').textContent = item.titulo;
+            
+            const chapterList = document.getElementById('chapter-list');
+            chapterList.innerHTML = ''; // Limpiar capítulos anteriores
+
+            if (item.capitulos && item.capitulos.length > 0) {
+                item.capitulos.forEach(cap => {
+                    // target="_blank" hace que el enlace se abra en una pestaña nueva
+                    chapterList.innerHTML += `
+                        <a href="${cap.url}" target="_blank" class="chapter-btn">${cap.nombre}</a>
+                    `;
+                });
+            } else {
+                chapterList.innerHTML = '<p style="color: #ccc; text-align: center;">Próximamente agregaremos enlaces...</p>';
+            }
+
+            document.getElementById('chapter-modal').style.display = 'flex';
+        }
+
+        function cerrarModal() {
+            document.getElementById('chapter-modal').style.display = 'none';
+        }
+
+        // Cerrar ventana si se hace clic afuera del recuadro
+        window.onclick = function(event) {
+            const modal = document.getElementById('chapter-modal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // CARGAR LAS SECCIONES
         mostrarTarjetas(animes, 'grid-animes');
         mostrarTarjetas(mangas, 'grid-mangas');
         mostrarTarjetas(novelas, 'grid-novelas');
