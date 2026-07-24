@@ -195,7 +195,7 @@
 </head>
 <body>
 
-    <!-- REPRODUCTOR DE MÚSICA INVISIBLE -->
+    
     <audio id="reproductor-musica" loop></audio>
 
     <!-- VISTA PRINCIPAL (Catálogo) -->
@@ -230,7 +230,7 @@
         </div>
     </div>
 
-    <!-- NUEVA VISTA DE DETALLE -->
+   
     <div id="vista-detalle">
         <div class="detalle-overlay">
             <button class="btn-volver" onclick="volverAlCatalogo()">⬅ Volver al inicio</button>
@@ -247,8 +247,7 @@
     </div>
 
     <script>
-        // --- BASE DE DATOS ACTUALIZADA ---
-        // Tus enlaces están intactos. He añadido "musica: ''" al final de cada uno.
+        
         
         const animes = [
             { 
@@ -258,7 +257,7 @@
                 enlaceAnime: "https://tioanime.com/anime/naruto",
                 enlaceManga: "https://lectortmoo.com/manga/naruto/",
                 enlaceNovela: " https://youtube.com/playlist?list=PLtjiNQasoV0tD7tCcegoB-_yk4ljLHiV8&si=s-Agsbj8SYKzZYdR",
-                musica: "AQUI_PON_TU_ENLACE_MP3_PARA_NARUTO" // <-- ¡Aquí va el mp3!
+                musica: "narutos-theme-song.mp3" // <-- ¡Aquí va el mp3!
             },
             { 
                 titulo: "Jujutsu Kaisen", 
@@ -267,7 +266,7 @@
                 enlaceAnime: "https://tioanime.com/anime/jujutsu-kaisen-tv",
                 enlaceManga: "https://lectortmoo.com/manga/jujutsu-kaisen/",
                 enlaceNovela: "https://mokochan314.home.blog/jujutsu-kaisen-official-light-novels/",
-                musica: ""
+                musica: "4-jujutsu-kaisen-intro.mp3"
             },
             { 
                 titulo: "Shingeki no Kyojin", 
@@ -276,7 +275,7 @@
                 enlaceAnime: "https://tioanime.com/directorio?q=shingeki+no+",
                 enlaceManga: "https://lectortmoo.com/manga/shingeki-no-kyojin/",
                 enlaceNovela: "",
-                musica: ""
+                musica: "ashesonthefire2.mp3"
             },
             { 
                 titulo: "Kimetsu no Yaiba", 
@@ -285,7 +284,7 @@
                 enlaceAnime: "https://tioanime.com/anime/kimetsu-no-yaiba",
                 enlaceManga: "https://lectortmoo.com/manga/kimetsu-no-yaiba/",
                 enlaceNovela: "https://mokochan314.home.blog/kimetsu-no-yaiba-official-light-novels/",
-                musica: ""
+                musica: "demons-slayer-cap.mp3"
             }
         ];
 
@@ -313,7 +312,7 @@
             }
         ];
 
-        // --- SISTEMA PARA CAMBIAR DE PANTALLA Y MUSICA ---
+        // SISTEMA PARA CAMBIAR DE PANTALLA Y MUSICA
         function mostrarTarjetas(lista, contenedorId) {
             const contenedor = document.getElementById(contenedorId);
             let contenidoHtml = '';
