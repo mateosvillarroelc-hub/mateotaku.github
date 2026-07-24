@@ -49,7 +49,7 @@
 
         /* VISTA PRINCIPAL (EL CATÁLOGO) */
         #vista-principal {
-            display: block; /* Se muestra por defecto */
+            display: block; 
         }
         
         .container {
@@ -82,18 +82,17 @@
         .card img { width: 100%; height: 280px; object-fit: cover; }
         .card h3 { padding: 12px; margin: 0; font-size: 1rem; color: #dfe6e9; }
 
-        /* VISTA DE DETALLE (LA NUEVA PÁGINA CON FONDO ANIMADO) */
+        /* VISTA DE DETALLE */
         #vista-detalle {
-            display: none; /* Oculta por defecto */
+            display: none; 
             min-height: 100vh;
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Hace que el fondo se vea más cinemático */
+            background-attachment: fixed; 
             position: relative;
             animation: fadeIn 0.5s ease-in-out;
         }
 
-        /* Filtro oscuro encima del GIF para que el texto resalte */
         .detalle-overlay {
             background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.9) 100%);
             min-height: 100vh;
@@ -144,24 +143,49 @@
             line-height: 1.5;
         }
 
+        /* CONTENEDOR DE BOTONES DINÁMICOS */
+        .botones-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         .btn-magico {
             display: inline-block;
-            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
             color: white;
-            padding: 18px 40px;
-            font-size: 1.3rem;
+            padding: 15px 35px;
+            font-size: 1.2rem;
             font-weight: bold;
             text-decoration: none;
             border-radius: 50px;
-            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.6);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
         .btn-magico:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 30px rgba(108, 92, 231, 0.9);
         }
+
+        /* Colores específicos para cada botón */
+        .btn-anime {
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.6);
+        }
+        .btn-anime:hover { box-shadow: 0 8px 30px rgba(108, 92, 231, 0.9); }
+
+        .btn-manga {
+            background: linear-gradient(45deg, #0984e3, #74b9ff);
+            box-shadow: 0 4px 20px rgba(9, 132, 227, 0.6);
+        }
+        .btn-manga:hover { box-shadow: 0 8px 30px rgba(9, 132, 227, 0.9); }
+
+        .btn-novela {
+            background: linear-gradient(45deg, #00b894, #55efc4);
+            box-shadow: 0 4px 20px rgba(0, 184, 148, 0.6);
+        }
+        .btn-novela:hover { box-shadow: 0 8px 30px rgba(0, 184, 148, 0.9); }
 
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -203,63 +227,84 @@
         </div>
     </div>
 
-    <!-- NUEVA VISTA DE DETALLE (Se abre al hacer clic) -->
+    <!-- NUEVA VISTA DE DETALLE -->
     <div id="vista-detalle">
         <div class="detalle-overlay">
             <button class="btn-volver" onclick="volverAlCatalogo()">⬅ Volver al inicio</button>
             <h2 class="detalle-titulo" id="detalle-titulo">Título</h2>
             <p class="detalle-desc" id="detalle-desc">Descripción...</p>
-            <a href="#" target="_blank" class="btn-magico" id="detalle-btn">Ver Serie Completa</a>
+            
+            <!-- CONTENEDOR DONDE APARECERÁN LOS BOTONES MÁGICAMENTE -->
+            <div class="botones-container" id="botones-container">
+                <a href="#" target="_blank" class="btn-magico btn-anime" id="btn-anime">▶ Ver Anime</a>
+                <a href="#" target="_blank" class="btn-magico btn-manga" id="btn-manga">📖 Leer Manga</a>
+                <a href="#" target="_blank" class="btn-magico btn-novela" id="btn-novela">📚 Leer Novela</a>
+            </div>
         </div>
     </div>
 
     <script>
-        // --- BASE DE DATOS ---
-        // Ahora usamos "fondoAnimado" donde puedes pegar enlaces de GIFs (.gif)
+        // --- BASE DE DATOS ACTUALIZADA ---
+        // Ahora tienes enlaceAnime, enlaceManga y enlaceNovela. 
+        // Si dejas las comillas vacías "", el botón no aparecerá.
         
         const animes = [
             { 
                 titulo: "Naruto", 
                 imagen: "https://cdng.europosters.eu/pod_public/750/229900.jpg", 
-                fondoAnimado: "https://64.media.tumblr.com/348ce108b19c5998e846daca63b4ed81/tumblr_n91q6d9rOc1szl458o1_500.gif", // ¡GIF DE KURAMA!
-                enlaceTotal: "https://tioanime.com/anime/naruto" 
+                fondoAnimado: "https://64.media.tumblr.com/348ce108b19c5998e846daca63b4ed81/tumblr_n91q6d9rOc1szl458o1_500.gif",
+                enlaceAnime: "https://tioanime.com/anime/naruto",
+                enlaceManga: "TU_ENLACE_AQUI_MANGA",
+                enlaceNovela: "" 
             },
             { 
                 titulo: "Jujutsu Kaisen", 
                 imagen: "https://www.ifema.es/img/xl/manga-jujutsu-kaisen/manga-jujutsu-kaisen.jpeg", 
-                fondoAnimado: "https://i.pinimg.com/originals/2a/cd/b9/2acdb9192f82fc1726058bb37e7a88aa.gif", // GIF de Gojo
-                enlaceTotal: "https://tioanime.com/anime/jujutsu-kaisen-tv" 
+                fondoAnimado: "https://i.pinimg.com/originals/2a/cd/b9/2acdb9192f82fc1726058bb37e7a88aa.gif",
+                enlaceAnime: "https://tioanime.com/anime/jujutsu-kaisen-tv",
+                enlaceManga: "TU_ENLACE_AQUI_MANGA",
+                enlaceNovela: "" 
             },
-            { titulo: "Shingeki no Kyojin", imagen: "https://m.media-amazon.com/images/I/71uHZO5ChkL._AC_UF894,1000_QL80_.jpg",
-             fondoAnimado: "https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyOTFrdXFiYnhlbGxtYTlpeHlqcWR5ZWF4NTFwNnZ6aWhrOGFwcHFmMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/9SvQFZ5xoGHza/giphy.gif", 
-             enlaceTotal: "https://tioanime.com/directorio?q=shingeki+no+" },
-            
-            { titulo: "Kimetsu no Yaiba", imagen: "https://es.kotaku.com/app/uploads/2026/04/Diseno-sin-titulo-2026-04-14T132626.562.jpg", 
-             fondoAnimado: "https://giffiles.alphacoders.com/220/220195.gif",
-             enlaceTotal: "https://tioanime.com/anime/kimetsu-no-yaiba" }
+            { 
+                titulo: "Shingeki no Kyojin", 
+                imagen: "https://m.media-amazon.com/images/I/71uHZO5ChkL._AC_UF894,1000_QL80_.jpg",
+                fondoAnimado: "https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyOTFrdXFiYnhlbGxtYTlpeHlqcWR5ZWF4NTFwNnZ6aWhrOGFwcHFmMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/9SvQFZ5xoGHza/giphy.gif", 
+                enlaceAnime: "https://tioanime.com/directorio?q=shingeki+no+",
+                enlaceManga: "",
+                enlaceNovela: "" 
+            },
+            { 
+                titulo: "Kimetsu no Yaiba", 
+                imagen: "https://es.kotaku.com/app/uploads/2026/04/Diseno-sin-titulo-2026-04-14T132626.562.jpg", 
+                fondoAnimado: "https://giffiles.alphacoders.com/220/220195.gif",
+                enlaceAnime: "https://tioanime.com/anime/kimetsu-no-yaiba",
+                enlaceManga: "",
+                enlaceNovela: "" 
+            }
         ];
 
         const mangas = [
-            { titulo: "Berserk", imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Berserk", 
-             fondoAnimado: "https://placehold.co/1920x1080/2d2d2d/a29bfe?text=Fondo", 
-             enlaceTotal: "TU_ENLACE_AQUI" }
-
-
-
-
-
-            
+            { 
+                titulo: "Berserk", 
+                imagen: "https://placehold.co/220x300/1e1e1e/a29bfe?text=Berserk", 
+                fondoAnimado: "https://placehold.co/1920x1080/2d2d2d/a29bfe?text=Fondo", 
+                enlaceAnime: "",
+                enlaceManga: "TU_ENLACE_AQUI_MANGA",
+                enlaceNovela: "" 
+            }
         ];
 
         const novelas = [
-            { titulo: "Classroom of the Elite", imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Classroom+Elite", fondoAnimado: "https://placehold.co/1920x1080/2d2d2d/00b894?text=Fondo", enlaceTotal: "TU_ENLACE_AQUI" }
+            { 
+                titulo: "Classroom of the Elite", 
+                imagen: "https://placehold.co/220x300/1e1e1e/00b894?text=Classroom+Elite", 
+                fondoAnimado: "https://placehold.co/1920x1080/2d2d2d/00b894?text=Fondo", 
+                enlaceAnime: "TU_ENLACE_AQUI_ANIME",
+                enlaceManga: "TU_ENLACE_AQUI_MANGA",
+                enlaceNovela: "TU_ENLACE_AQUI_NOVELA" 
+            }
         ];
 
-
-
-
-
-        
         // --- SISTEMA PARA CAMBIAR DE PANTALLA ---
         function mostrarTarjetas(lista, contenedorId) {
             const contenedor = document.getElementById(contenedorId);
@@ -280,39 +325,61 @@
         function abrirDetalle(itemDataTexto) {
             const item = JSON.parse(decodeURIComponent(itemDataTexto));
             
-            // 1. Ocultar el catálogo y mostrar la nueva sección
             document.getElementById('vista-principal').style.display = 'none';
             document.getElementById('vista-detalle').style.display = 'block';
-            
-            // 2. Subir automáticamente hasta arriba
             window.scrollTo(0, 0);
 
-            // 3. Poner el fondo animado y el título
             document.getElementById('vista-detalle').style.backgroundImage = `url('${item.fondoAnimado}')`;
             document.getElementById('detalle-titulo').textContent = item.titulo;
             
-            const btnEnlace = document.getElementById('detalle-btn');
+            const btnAnime = document.getElementById('btn-anime');
+            const btnManga = document.getElementById('btn-manga');
+            const btnNovela = document.getElementById('btn-novela');
             const desc = document.getElementById('detalle-desc');
 
-            // 4. Configurar el botón mágico
-            if(item.enlaceTotal && item.enlaceTotal !== "TU_ENLACE_AQUI") {
-                desc.textContent = `Con este enlace podrás encontrar ${item.titulo} en su totalidad para disfrutar de todos sus capítulos y temporadas.`;
-                btnEnlace.href = item.enlaceTotal;
-                btnEnlace.style.display = 'inline-block';
-                btnEnlace.textContent = `▶ Ver ${item.titulo}`;
+            let enlacesActivos = 0;
+
+            // Lógica para mostrar/ocultar el botón de ANIME
+            if(item.enlaceAnime && item.enlaceAnime !== "") {
+                btnAnime.href = item.enlaceAnime;
+                btnAnime.style.display = 'inline-block';
+                enlacesActivos++;
             } else {
-                desc.textContent = `Próximamente agregaremos el enlace oficial para ${item.titulo}...`;
-                btnEnlace.style.display = 'none';
+                btnAnime.style.display = 'none';
+            }
+
+            // Lógica para mostrar/ocultar el botón de MANGA
+            if(item.enlaceManga && item.enlaceManga !== "") {
+                btnManga.href = item.enlaceManga;
+                btnManga.style.display = 'inline-block';
+                enlacesActivos++;
+            } else {
+                btnManga.style.display = 'none';
+            }
+
+            // Lógica para mostrar/ocultar el botón de NOVELA
+            if(item.enlaceNovela && item.enlaceNovela !== "") {
+                btnNovela.href = item.enlaceNovela;
+                btnNovela.style.display = 'inline-block';
+                enlacesActivos++;
+            } else {
+                btnNovela.style.display = 'none';
+            }
+
+            // Ajuste del texto descriptivo
+            if (enlacesActivos > 0) {
+                desc.textContent = `Selecciona qué formato de ${item.titulo} deseas disfrutar:`;
+            } else {
+                desc.textContent = `Próximamente agregaremos los enlaces oficiales para ${item.titulo}...`;
             }
         }
 
         function volverAlCatalogo() {
-            // Regresar todo a la normalidad
             document.getElementById('vista-detalle').style.display = 'none';
             document.getElementById('vista-principal').style.display = 'block';
         }
 
-        // Cargar todo
+        // Inicialización
         mostrarTarjetas(animes, 'grid-animes');
         mostrarTarjetas(mangas, 'grid-mangas');
         mostrarTarjetas(novelas, 'grid-novelas');
