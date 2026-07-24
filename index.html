@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Biblioteca Otaku</title>
+    <style>
+        /* Diseño General (Modo Oscuro) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth; /* Movimiento suave al hacer clic en el menú */
+        }
+
+        /* Barra de Navegación Fija */
+        header {
+            background-color: #1a1a1a;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #6c5ce7;
+        }
+
+        header h1 {
+            margin: 0 0 15px 0;
+            color: #6c5ce7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: #a29bfe;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Separación de las Secciones */
+        section {
+            padding-top: 100px; /* Evita que el título quede oculto bajo el menú */
+            margin-bottom: 60px;
+            min-height: 50vh;
+        }
+
+        h2 {
+            border-bottom: 2px solid #4a4a4a;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        /* Sistema de Cuadrícula para las Portadas */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        /* Tarjetas de cada serie */
+        .card {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #333;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover; /* Mantiene la proporción de la imagen */
+            background-color: #2d2d2d;
+        }
+
+        .card h3 {
+            padding: 15px;
+            margin: 0;
+            font-size: 1.1rem;
+            color: #dfe6e9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menú Superior -->
+    <header>
+        <h1>Mi Universo Otaku</h1>
+        <nav>
+            <a href="#animes">Animes</a>
+            <a href="#mangas">Mangas</a>
+            <a href="#novelas">Novelas Ligeras</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <!-- SECCIÓN DE ANIMES -->
+        <section id="animes">
+            <h2>Animes</h2>
+            <div class="grid">
+                <!-- Tarjeta 1 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/220x300/333/fff?text=Portada+Anime" alt="Portada Anime">
+                    <h3>Nombre del Anime</h3>
+                </div>
+                <!-- Tarjeta 2 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/220x300/333/fff?text=Portada+Anime" alt="Portada Anime">
+                    <h3>Otro Anime Genial</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE MANGAS -->
+        <section id="mangas">
+            <h2>Mangas</h2>
+            <div class="grid">
+                <!-- Tarjeta 1 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/220x300/333/fff?text=Portada+Manga" alt="Portada Manga">
+                    <h3>Nombre del Manga</h3>
+                </div>
+                <!-- Tarjeta 2 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/220x300/333/fff?text=Portada+Manga" alt="Portada Manga">
+                    <h3>Mi Manga Favorito</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE NOVELAS LIGERAS -->
+        <section id="novelas">
+            <h2>Novelas Ligeras</h2>
+            <div class="grid">
+                <!-- Tarjeta 1 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/220x300/333/fff?text=Portada+Novela" alt="Portada Novela">
+                    <h3>Nombre de la Novela</h3>
+                </div>
+                <!-- Tarjeta 2 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/220x300/333/fff?text=Portada+Novela" alt="Portada Novela">
+                    <h3>Volumen 1</h3>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
