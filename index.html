@@ -11,7 +11,6 @@
         /* --- DISEÑO GENERAL Y FONDO --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* El filtro oscuro y el paisaje anime */
             background: linear-gradient(rgba(15, 15, 15, 0.85), rgba(15, 15, 15, 0.95)), url('https://cdn.wallpapersafari.com/31/92/a1oLCz.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
@@ -20,22 +19,22 @@
             scroll-behavior: smooth;
         }
 
-        /* --- NUEVO ENCABEZADO ÉPICO (Estilo Mushoku) --- */
+        /* --- ENCABEZADO ÉPICO --- */
         .hero-section {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 80px 20px 60px 20px;
+            padding: 60px 20px 40px 20px;
             min-height: 50vh;
             background: radial-gradient(circle, rgba(15,15,15,0.4) 0%, rgba(15,15,15,0.9) 100%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .hero-subtitle {
-            color: #d4af37; /* Dorado oscuro */
-            font-size: 0.9rem;
+            color: #d4af37;
+            font-size: 0.85rem;
             letter-spacing: 5px;
             text-transform: uppercase;
             margin-bottom: 15px;
@@ -44,9 +43,8 @@
 
         .hero-title {
             font-family: 'Cinzel', serif;
-            font-size: 5rem;
+            font-size: 4.5rem;
             margin: 0;
-            /* Efecto de texto dorado brillante */
             background: linear-gradient(to bottom, #fffde4, #e2b938);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -56,40 +54,42 @@
 
         .hero-desc {
             font-family: 'Lora', serif;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #dcdde1;
             max-width: 700px;
-            margin: 25px auto;
+            margin: 20px auto;
             font-style: italic;
             text-shadow: 1px 1px 5px rgba(0,0,0,1);
+            padding: 0 15px;
         }
 
         .hero-desc span {
             display: block;
             margin-top: 10px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #a29bfe;
         }
 
+        /* MENÚ DE CATEGORÍAS */
         .hero-nav {
-            margin-top: 30px;
+            margin-top: 25px;
             display: flex;
-            gap: 20px;
+            gap: 12px;
             flex-wrap: wrap;
             justify-content: center;
+            max-width: 900px;
         }
 
-        /* Botones del encabezado */
         .hero-nav a {
-            background: linear-gradient(45deg, #d35400, #f39c12); /* Degradado Naranja/Dorado */
+            background: linear-gradient(45deg, #d35400, #f39c12); 
             color: white;
             text-decoration: none;
-            padding: 15px 35px;
+            padding: 10px 20px;
             border-radius: 50px;
             font-weight: bold;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -99,7 +99,7 @@
             box-shadow: 0 8px 25px rgba(243, 156, 18, 0.8);
         }
 
-        /* --- VISTA PRINCIPAL (EL CATÁLOGO) --- */
+        /* --- CATÁLOGO --- */
         #vista-principal { display: block; }
         
         .container {
@@ -107,25 +107,32 @@
             margin: 0 auto;
             padding: 20px;
         }
-        section { padding-top: 40px; margin-bottom: 60px; }
+        
+        section { 
+            padding-top: 60px; /* Espacio para que al hacer clic en el menú se vea bien */
+            margin-bottom: 50px; 
+        }
         
         h2 { 
-            border-bottom: 2px solid rgba(255,255,255,0.1); 
+            border-bottom: 2px solid rgba(243, 156, 18, 0.3); /* Línea dorada suave */
             padding-bottom: 10px; 
-            margin-bottom: 30px; 
-            font-size: 2.5rem; 
+            margin-bottom: 25px; 
+            font-size: 2.2rem; 
             font-family: 'Cinzel', serif; 
             color: #f39c12;
-            text-align: center; /* Título centrado */
+            text-align: left; /* Títulos a la izquierda para separar secciones */
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
         }
+        
         .card {
-            background-color: rgba(30, 30, 30, 0.6); /* Tarjetas un poco transparentes */
+            background-color: rgba(30, 30, 30, 0.6); 
             border-radius: 10px;
             overflow: hidden;
             text-align: center;
@@ -135,14 +142,22 @@
             backdrop-filter: blur(5px);
         }
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(243, 156, 18, 0.3);
             border-color: #f39c12;
         }
-        .card img { width: 100%; height: 280px; object-fit: cover; }
-        .card h3 { padding: 12px; margin: 0; font-size: 1.1rem; color: #dfe6e9; font-weight: bold; }
+        .card img { width: 100%; height: 250px; object-fit: cover; }
+        .card h3 { padding: 10px; margin: 0; font-size: 1rem; color: #dfe6e9; font-weight: bold; }
 
-        /* --- VISTA DE DETALLE (PANTALLA CON GIF) --- */
+        .mensaje-vacio {
+            grid-column: 1 / -1;
+            color: #a29bfe;
+            font-style: italic;
+            font-size: 1.1rem;
+            padding: 20px 0;
+        }
+
+        /* --- VISTA DE DETALLE --- */
         #vista-detalle {
             display: none; 
             min-height: 100vh;
@@ -154,7 +169,7 @@
         }
 
         .detalle-overlay {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.9) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.95) 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -167,13 +182,13 @@
 
         .btn-volver {
             position: absolute;
-            top: 30px;
-            left: 30px;
+            top: 20px;
+            left: 20px;
             background: rgba(255, 255, 255, 0.1);
             color: #fff;
             border: 2px solid #fff;
-            padding: 10px 25px;
-            font-size: 1.1rem;
+            padding: 8px 18px;
+            font-size: 0.95rem;
             border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -182,31 +197,32 @@
         .btn-volver:hover {
             background: #fff;
             color: #000;
-            transform: scale(1.05);
         }
 
         .detalle-titulo {
             font-family: 'Cinzel', serif;
-            font-size: 5rem;
+            font-size: 3.5rem;
             color: #ffffff;
             text-shadow: 0 0 20px rgba(243, 156, 18, 0.8), 0 0 40px rgba(0,0,0,1);
-            margin: 0 0 20px 0;
+            margin: 15px 0 15px 0;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
+            padding: 0 10px;
         }
 
         .detalle-desc {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: #e0e0e0;
             text-shadow: 2px 2px 4px rgba(0,0,0,1);
             max-width: 700px;
-            margin-bottom: 40px;
-            line-height: 1.5;
+            margin-bottom: 30px;
+            line-height: 1.4;
+            padding: 0 15px;
         }
 
         .botones-container {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -214,8 +230,8 @@
         .btn-magico {
             display: inline-block;
             color: white;
-            padding: 15px 35px;
-            font-size: 1.2rem;
+            padding: 12px 28px;
+            font-size: 1rem;
             font-weight: bold;
             text-decoration: none;
             border-radius: 50px;
@@ -224,18 +240,27 @@
             letter-spacing: 1px;
         }
 
-        .btn-magico:hover { transform: scale(1.1); }
+        .btn-magico:hover { transform: scale(1.05); }
 
         .btn-anime { background: linear-gradient(45deg, #6c5ce7, #a29bfe); box-shadow: 0 4px 20px rgba(108, 92, 231, 0.6); }
-        .btn-anime:hover { box-shadow: 0 8px 30px rgba(108, 92, 231, 0.9); }
         .btn-manga { background: linear-gradient(45deg, #0984e3, #74b9ff); box-shadow: 0 4px 20px rgba(9, 132, 227, 0.6); }
-        .btn-manga:hover { box-shadow: 0 8px 30px rgba(9, 132, 227, 0.9); }
         .btn-novela { background: linear-gradient(45deg, #00b894, #55efc4); box-shadow: 0 4px 20px rgba(0, 184, 148, 0.6); }
-        .btn-novela:hover { box-shadow: 0 8px 30px rgba(0, 184, 148, 0.9); }
 
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        /* --- ADAPTACIÓN MÁGICA PARA CELULARES --- */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.8rem; }
+            .detalle-titulo { font-size: 2.5rem; }
+            .hero-section { padding: 40px 15px; }
+            .btn-volver { top: 15px; left: 15px; padding: 6px 14px; font-size: 0.85rem; }
+            .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
+            .card img { height: 200px; }
+            h2 { font-size: 1.8rem; }
+            .hero-nav a { padding: 8px 15px; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -246,8 +271,6 @@
 
     <!-- VISTA PRINCIPAL (Catálogo) -->
     <div id="vista-principal">
-        
-        <!-- NUEVO ENCABEZADO ESTILO MUSHOKU -->
         <header class="hero-section">
             <span class="hero-subtitle">♦ Mi Biblioteca Personal ♦</span>
             <h1 class="hero-title">MI UNIVERSO<br>OTAKU</h1>
@@ -255,28 +278,57 @@
                 Esta página está hecha para que los amantes del anime, manga y novela ligera puedan seguir lo que les gusta.
                 <span>(Para una mejor experiencia en el celular, te recomiendo usar el sitio en modo de computadora)</span>
                 <span>(Te redireccionará al contenido que tú quieras ver)</span>
-                
-               
             </p>
+            
+            <!-- NUEVO MENÚ POR CATEGORÍAS -->
             <nav class="hero-nav">
-                <!-- Botón único que lleva directo a tu colección -->
-                <a href="#catalogo">Explorar Catálogo</a>
+                <a href="#shonen">Shonen & Acción</a>
+                <a href="#isekai">Isekai & Fantasía</a>
+                <a href="#seinen">Seinen & Misterio</a>
+                <a href="#escolar">Deportes & Escolar</a>
+                <a href="#romance">Romance</a>
             </nav>
         </header>
 
-        <!-- SECCIÓN ÚNICA CON TODAS TUS TARJETAS -->
         <div class="container">
-            <section id="catalogo">
-                <h2>Obras Disponibles</h2>
-                <div class="grid" id="grid-catalogo"></div>
+            
+            <!-- SECCIÓN 1: SHONEN -->
+            <section id="shonen">
+                <h2>Shonen (Acción y Aventura)</h2>
+                <div class="grid" id="grid-shonen"></div>
             </section>
+
+            <!-- SECCIÓN 2: ISEKAI & FANTASÍA -->
+            <section id="isekai">
+                <h2>Isekai & Magia</h2>
+                <div class="grid" id="grid-isekai"></div>
+            </section>
+
+            <!-- SECCIÓN 3: SEINEN & MISTERIO -->
+            <section id="seinen">
+                <h2>Seinen & Misterio</h2>
+                <div class="grid" id="grid-seinen"></div>
+            </section>
+
+            <!-- SECCIÓN 4: DEPORTES & ESCOLAR -->
+            <section id="escolar">
+                <h2>Deportes & Vida Escolar</h2>
+                <div class="grid" id="grid-escolar"></div>
+            </section>
+
+            <!-- SECCIÓN 5: ROMANCE (Preparada para el futuro) -->
+            <section id="romance">
+                <h2>Romance & Comedia</h2>
+                <div class="grid" id="grid-romance"></div>
+            </section>
+
         </div>
     </div>
 
-    <!-- VISTA DE DETALLE (Pantalla con el GIF) -->
+    <!-- VISTA DE DETALLE -->
     <div id="vista-detalle">
         <div class="detalle-overlay">
-            <button class="btn-volver" onclick="volverAlCatalogo()">⬅ Volver al inicio</button>
+            <button class="btn-volver" onclick="volverAlCatalogo()">⬅ Volver</button>
             <h2 class="detalle-titulo" id="detalle-titulo">Título</h2>
             <p class="detalle-desc" id="detalle-desc">Descripción...</p>
             
@@ -289,10 +341,11 @@
     </div>
 
     <script>
-        // --- BASE DE DATOS UNIFICADA ---
+        // --- BASE DE DATOS UNIFICADA (¡Ahora con categorías!) ---
         const catalogoCompleto = [
             { 
                 titulo: "Naruto", 
+                categoria: "shonen",
                 imagen: "https://cdng.europosters.eu/pod_public/750/229900.jpg", 
                 fondoAnimado: "https://64.media.tumblr.com/348ce108b19c5998e846daca63b4ed81/tumblr_n91q6d9rOc1szl458o1_500.gif",
                 enlaceAnime: "https://tioanime.com/anime/naruto",
@@ -302,6 +355,7 @@
             },
             { 
                 titulo: "Jujutsu Kaisen", 
+                categoria: "shonen",
                 imagen: "https://www.ifema.es/img/xl/manga-jujutsu-kaisen/manga-jujutsu-kaisen.jpeg", 
                 fondoAnimado: "https://i.pinimg.com/originals/2a/cd/b9/2acdb9192f82fc1726058bb37e7a88aa.gif",
                 enlaceAnime: "https://tioanime.com/anime/jujutsu-kaisen-tv",
@@ -311,6 +365,7 @@
             },
             { 
                 titulo: "Shingeki no Kyojin", 
+                categoria: "shonen",
                 imagen: "https://m.media-amazon.com/images/I/71uHZO5ChkL._AC_UF894,1000_QL80_.jpg",
                 fondoAnimado: "https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyOTFrdXFiYnhlbGxtYTlpeHlqcWR5ZWF4NTFwNnZ6aWhrOGFwcHFmMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/9SvQFZ5xoGHza/giphy.gif", 
                 enlaceAnime: "https://tioanime.com/directorio?q=shingeki+no+",
@@ -320,6 +375,7 @@
             },
             { 
                 titulo: "Kimetsu no Yaiba", 
+                categoria: "shonen",
                 imagen: "https://es.kotaku.com/app/uploads/2026/04/Diseno-sin-titulo-2026-04-14T132626.562.jpg", 
                 fondoAnimado: "https://giffiles.alphacoders.com/220/220195.gif",
                 enlaceAnime: "https://tioanime.com/anime/kimetsu-no-yaiba",
@@ -329,6 +385,7 @@
             },
             { 
                 titulo: "One piece", 
+                categoria: "shonen",
                 imagen: "https://i.blogs.es/37fe6c/one-piece-1/1200_900.jpeg",
                 fondoAnimado: "https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyY2Z0YzVxc29kODB3emRsZjZwdzhtampiMDRmdWN1ZmI5ajBkNXJ3eSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/YWB6Hi29vA3jG/giphy.gif", 
                 enlaceAnime: "https://tioanime.com/anime/one-piece-tv",
@@ -338,6 +395,7 @@
             },
             { 
                 titulo: "Solo Leveling", 
+                categoria: "shonen",
                 imagen: "https://images.cgames.de/images/gsgp/290/solo-leveling_6388739.jpg", 
                 fondoAnimado: "https://media.tenor.com/yuuYrhZj0dQAAAAM/solo-leveling-statue-of-god.gif", 
                 enlaceAnime: "https://tioanime.com/anime/ore-dake-level-up-na-ken",
@@ -347,6 +405,7 @@
             },
             { 
                 titulo: "Boku no Hero", 
+                categoria: "shonen",
                 imagen: "https://m.media-amazon.com/images/M/MV5BY2QzODA5OTQtYWJlNi00ZjIzLThhNTItMDMwODhlYzYzMjA2XkEyXkFqcGc@._V1_.jpg", 
                 fondoAnimado: "https://i.pinimg.com/originals/a7/a8/ed/a7a8ed9be95ed57f6645c580f6808e17.gif", 
                 enlaceAnime: "https://tioanime.com/anime/boku-no-hero-academia-2016",
@@ -356,6 +415,7 @@
             },
             { 
                 titulo: "Kaiju No. 8", 
+                categoria: "shonen",
                 imagen: "https://images.cdn2.buscalibre.com/fit-in/360x360/48/ce/48ce5aa33ebee9712f472569198fcfbe.jpg", 
                 fondoAnimado: "https://media.giphy.com/media/axbji2Aa6BVfOzcGCH/giphy.gif", 
                 enlaceAnime: "https://tioanime.com/anime/kaijuu-8gou",
@@ -365,6 +425,7 @@
             },
             { 
                 titulo: "Hunter x Hunter", 
+                categoria: "shonen",
                 imagen: "https://m.media-amazon.com/images/M/MV5BYzYxOTlkYzctNGY2MC00MjNjLWIxOWMtY2QwYjcxZWIwMmEwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
                 fondoAnimado: "https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyMThzdm40MnZwemR4a28zYXY0Zm1sOHh1YjZzOHNvdWhzMmZlYzk0eCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/nbB1CV1fazlGo/source.gif", 
                 enlaceAnime: "https://tioanime.com/anime/hunter-x-hunter-2011",
@@ -373,25 +434,8 @@
                 musica: "hxh.mp3"
             },
             { 
-                titulo: "Death Note", 
-                imagen: "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/10-cosas-que-debes-saber-sobre-death-note-antes-de-que-se-estrene-la-pelicula/103445002-1-esl-ES/10-cosas-que-debes-saber-sobre-Death-Note-antes-de-que-se-estrene-la-pelicula.jpg", 
-                fondoAnimado: "https://media1.tenor.com/m/9C-wnbKI-IQAAAAC/death-note.gif", 
-                enlaceAnime: "https://tioanime.com/anime/death-note",
-                enlaceManga: "https://zonatmo.org/library/manga/8160/death-note",
-                enlaceNovela: "https://es.scribd.com/doc/257472882/Death-Note-Another-Note",
-                musica: "death-note.mp3"
-            },
-            { 
-                titulo: "Frieren", 
-                imagen: "https://m.media-amazon.com/images/S/pv-target-images/a41ad9bf674db05a4ad95ee8b9f688fe2093d30580a181e45be4c66bc22b8f46.jpg", 
-                fondoAnimado: "https://i.pinimg.com/originals/55/b8/1a/55b81a4194565a56b10d41c29482c744.gif", 
-                enlaceAnime: "https://tioanime.com/anime/sousou-no-frieren",
-                enlaceManga: "https://zonatmo.org/library/manga/12447/sousou-no-frieren",
-                enlaceNovela: "https://frieren-anime.jp/special/novel/",
-                musica: "frieren.mp3"
-            },
-            { 
                 titulo: "Dragon Ball", 
+                categoria: "shonen",
                 imagen: "https://m.media-amazon.com/images/S/pv-target-images/81783d5006b5fcefb2ec585b8535b139723117de7dd503786cb35d4dadcff6e9._SX1080_FMjpg_.jpg", 
                 fondoAnimado: "https://i.pinimg.com/originals/57/21/61/5721612fc05e9d1604c1dcda922798e3.gif", 
                 enlaceAnime: "https://tioanime.com/directorio?q=DRAGON+BALL",
@@ -400,25 +444,38 @@
                 musica: "dragon-ball.mp3"
             },
             { 
-                titulo: "One Punch Man", 
-                imagen: "https://m.media-amazon.com/images/M/MV5BNzMwOGQ5MWItNzE3My00ZDYyLTk4NzAtZWIyYWI0NTZhYzY0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
-                fondoAnimado: "https://i.pinimg.com/originals/6a/78/e3/6a78e3fae3a303d67145a86bfacb3ba1.gif", 
-                enlaceAnime: "https://tioanime.com/anime/one-punch-man",
-                enlaceManga: "https://zonatmo.org/library/manga/8232/one-punch-man",
-                enlaceNovela: "",
-                musica: "one-punch.mp3"
+                titulo: "Black Clover", 
+                categoria: "shonen",
+                imagen: "https://m.media-amazon.com/images/M/MV5BZmZkZjNhMWMtM2U0Mi00MjdlLTk3NmMtMTMwZjgwOTJmODMzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
+                fondoAnimado: "https://giffiles.alphacoders.com/219/219025.gif", 
+                enlaceAnime: "", enlaceManga: "", enlaceNovela: "", musica: ""
             },
             { 
-                titulo: "Classroom of the Elite", 
-                imagen: "https://m.media-amazon.com/images/M/MV5BMDg3MGVhNWUtYTQ2NS00ZDdiLTg5MTMtZmM5MjUzN2IxN2I4XkEyXkFqcGc@._V1_.jpg", 
-                fondoAnimado: "https://i.pinimg.com/originals/d9/9c/8c/d99c8cdceb5d52d55268f82cc5bcc728.gif", 
-                enlaceAnime: "https://tioanime.com/anime/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-tv",
-                enlaceManga: "https://zonatmo.org/library/novel/9054/classroom-of-the-elite",
-                enlaceNovela: "https://www.animemaniaco.com/2017/07/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-novela-ligera-en-espanol.html",
-                musica: ""
+                titulo: "Sakamoto Days", 
+                categoria: "shonen",
+                imagen: "https://m.media-amazon.com/images/M/MV5BM2MwZDRmYWItNGIzZC00ZWExLWEwNWYtNmM1ZmU3OTA3NmY4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
+                fondoAnimado: "https://giffiles.alphacoders.com/223/223323.gif", 
+                enlaceAnime: "", enlaceManga: "", enlaceNovela: "", musica: ""
             },
+            { 
+                titulo: "JoJo's Bizarre Adventure", 
+                categoria: "shonen",
+                imagen: "https://m.media-amazon.com/images/M/MV5BMzIyNzY4NTMtNmVhYS00OWFhLTkwMWMtOGFkNTdmNWU2ZDdiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
+                fondoAnimado: "https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyejV0d2c5cnAwbG1rcTBpN3p1a3B3bnZoc3dwZDBnaHRtMDlsd2N6YSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/4N5vB4aErlVtVsywBw/source.gif", 
+                enlaceAnime: "", enlaceManga: "", enlaceNovela: "", musica: ""
+            },
+            { 
+                titulo: "Dandadan", 
+                categoria: "shonen",
+                imagen: "https://m.media-amazon.com/images/M/MV5BYWFhOWMxNTYtZThiMi00ZmQ5LTlmODktN2QwNzUyZjMyZGQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
+                fondoAnimado: "https://i.pinimg.com/originals/47/43/d6/4743d6517d396e2c4e622a6c8f47832d.gif", 
+                enlaceAnime: "", enlaceManga: "", enlaceNovela: "", musica: ""
+            },
+            
+            // --- ISEKAI & FANTASÍA ---
             { 
                 titulo: "Mushoku Tensei", 
+                categoria: "isekai",
                 imagen: "https://m.media-amazon.com/images/M/MV5BYWQwNjk3MDItNDAxMS00YTQ2LWEyNDctMGYyZTE5OGQxNGQ1XkEyXkFqcGc@._V1_.jpg", 
                 fondoAnimado: "https://i.pinimg.com/originals/e0/1f/38/e01f38365614372796562cfe76f9fd9c.gif", 
                 enlaceAnime: "https://tioanime.com/anime/mushoku-tensei-isekai-ittara-honki-dasu",
@@ -428,6 +485,7 @@
             },
             { 
                 titulo: "Sword Art Online", 
+                categoria: "isekai",
                 imagen: "https://m.media-amazon.com/images/M/MV5BN2NhYzU2NDEtYzI1NS00MjgzLThjZGUtOTYxNGJkZjZmNDdjXkEyXkFqcGc@._V1_QL75_UY281_CR6,0,190,281_.jpg", 
                 fondoAnimado: "https://i.pinimg.com/originals/5b/42/02/5b4202d50679704f184b06637f5999f8.gif", 
                 enlaceAnime: "https://tioanime.com/anime/sword-art-online-alternative-gun-gale-online",
@@ -436,129 +494,112 @@
                 musica: "sao.mp3"
             },
             { 
+                titulo: "Re:Zero", 
+                categoria: "isekai",
+                imagen: "https://m.media-amazon.com/images/M/MV5BZWI4OTVkNDgtOTBmMC00M2I3LTk3NTctOWY3NmRkODIxMDViXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
+                fondoAnimado: "https://i.makeagif.com/media/5-13-2020/1xQsvl.gif", 
+                enlaceAnime: "", enlaceManga: "", enlaceNovela: "", musica: ""
+            },
+            { 
                 titulo: "DanMachi", 
+                categoria: "isekai",
                 imagen: "https://m.media-amazon.com/images/M/MV5BN2NkOTJiMDMtYzY0ZC00YjAxLWFlYjUtMTk2NjhmZTEzMmI4XkEyXkFqcGc@._V1_.jpg", 
                 fondoAnimado: "https://i.pinimg.com/originals/5f/ae/0f/5fae0f6c58bff85b5fb51944f3d19201.gif", 
-                enlaceAnime: "",
-                enlaceManga: "",
+                enlaceAnime: "", enlaceManga: "", enlaceNovela: "", musica: ""
+            },
+            { 
+                titulo: "Frieren", 
+                categoria: "isekai",
+                imagen: "https://m.media-amazon.com/images/S/pv-target-images/a41ad9bf674db05a4ad95ee8b9f688fe2093d30580a181e45be4c66bc22b8f46.jpg", 
+                fondoAnimado: "https://i.pinimg.com/originals/55/b8/1a/55b81a4194565a56b10d41c29482c744.gif", 
+                enlaceAnime: "https://tioanime.com/anime/sousou-no-frieren",
+                enlaceManga: "https://zonatmo.org/library/manga/12447/sousou-no-frieren",
+                enlaceNovela: "https://frieren-anime.jp/special/novel/",
+                musica: "frieren.mp3"
+            },
+
+            // --- SEINEN & MISTERIO ---
+            { 
+                titulo: "Death Note", 
+                categoria: "seinen",
+                imagen: "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/10-cosas-que-debes-saber-sobre-death-note-antes-de-que-se-estrene-la-pelicula/103445002-1-esl-ES/10-cosas-que-debes-saber-sobre-Death-Note-antes-de-que-se-estrene-la-pelicula.jpg", 
+                fondoAnimado: "https://media1.tenor.com/m/9C-wnbKI-IQAAAAC/death-note.gif", 
+                enlaceAnime: "https://tioanime.com/anime/death-note",
+                enlaceManga: "https://zonatmo.org/library/manga/8160/death-note",
+                enlaceNovela: "https://es.scribd.com/doc/257472882/Death-Note-Another-Note",
+                musica: "death-note.mp3"
+            },
+            { 
+                titulo: "One Punch Man", 
+                categoria: "seinen",
+                imagen: "https://m.media-amazon.com/images/M/MV5BNzMwOGQ5MWItNzE3My00ZDYyLTk4NzAtZWIyYWI0NTZhYzY0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
+                fondoAnimado: "https://i.pinimg.com/originals/6a/78/e3/6a78e3fae3a303d67145a86bfacb3ba1.gif", 
+                enlaceAnime: "https://tioanime.com/anime/one-punch-man",
+                enlaceManga: "https://zonatmo.org/library/manga/8232/one-punch-man",
                 enlaceNovela: "",
+                musica: "one-punch.mp3"
+            },
+            { 
+                titulo: "Tokyo Ghoul", 
+                categoria: "seinen",
+                imagen: "https://m.media-amazon.com/images/M/MV5BYmU0ODU1MzItYzA4Yi00NjI1LWIxNWQtYmRiMTkxNGQ2Mjk1XkEyXkFqcGc@._V1_.jpg", 
+                fondoAnimado: "https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyeXNnbHljdWQwNjh1NGpsYWV3czh3N3Y2amx4aHYxbjc0eDJ4OXkwZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2XLoAphEiufV6/giphy.gif", 
+                enlaceAnime: "", enlaceManga: "", enlaceNovela: "", musica: ""
+            },
+            { 
+                titulo: "Vinland Saga", 
+                categoria: "seinen",
+                imagen: "https://m.media-amazon.com/images/M/MV5BNDA3MGNmZTEtMzFiMy00ZmViLThhNmQtMjQ4ZDc5MDEyN2U1XkEyXkFqcGc@._V1_.jpg", 
+                fondoAnimado: "https://i.pinimg.com/originals/4e/f5/5e/4ef55eb43832b08ce2ca61469158c6e6.gif", 
+                enlaceAnime: "", enlaceManga: "", enlaceNovela: "", musica: ""
+            },
+            { 
+                titulo: "Record of Ragnarok", 
+                categoria: "seinen",
+                imagen: "https://m.media-amazon.com/images/M/MV5BNTMzN2VjNmQtZTVjZi00M2MyLWJlOTYtYjMxODA0ZjhmYjliXkEyXkFqcGc@._V1_.jpg", 
+                fondoAnimado: "https://i.pinimg.com/originals/cd/53/bd/cd53bd81189f8604c7d0863cfea0c65d.gif", 
+                enlaceAnime: "", enlaceManga: "", enlaceNovela: "", musica: ""
+            },
+
+            // --- DEPORTES & ESCOLAR ---
+            { 
+                titulo: "Classroom of the Elite", 
+                categoria: "escolar",
+                imagen: "https://m.media-amazon.com/images/M/MV5BMDg3MGVhNWUtYTQ2NS00ZDdiLTg5MTMtZmM5MjUzN2IxN2I4XkEyXkFqcGc@._V1_.jpg", 
+                fondoAnimado: "https://i.pinimg.com/originals/d9/9c/8c/d99c8cdceb5d52d55268f82cc5bcc728.gif", 
+                enlaceAnime: "https://tioanime.com/anime/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-tv",
+                enlaceManga: "https://zonatmo.org/library/novel/9054/classroom-of-the-elite",
+                enlaceNovela: "https://www.animemaniaco.com/2017/07/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-novela-ligera-en-espanol.html",
                 musica: ""
             },
             { 
                 titulo: "Haikyuu!!", 
+                categoria: "escolar",
                 imagen: "https://m.media-amazon.com/images/M/MV5BYjYxMWFlYTAtYTk0YS00NTMxLWJjNTQtM2E0NjdhYTRhNzE4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
                 fondoAnimado: "https://i.pinimg.com/originals/ba/c6/4c/bac64c2a11163c09fa02057c07cdd511.gif", 
-                enlaceAnime: "",
-                enlaceManga: "",
-                enlaceNovela: "",
-                musica: ""
+                enlaceAnime: "", enlaceManga: "", enlaceNovela: "", musica: ""
             },
             { 
                 titulo: "Blue Lock", 
+                categoria: "escolar",
                 imagen: "https://m.media-amazon.com/images/M/MV5BOGRhNDQ3NTgtMmU3YS00OWI0LTgyMmUtNGQwODk0MDg2YTYzXkEyXkFqcGc@._V1_.jpg", 
                 fondoAnimado: "https://usagif.com/wp-content/uploads/2022/hqgif/blue-lock-2.gif", 
-                enlaceAnime: "",
-                enlaceManga: "",
-                enlaceNovela: "",
-                musica: ""
-            },
-            { 
-                titulo: "Black Clover", 
-                imagen: "https://m.media-amazon.com/images/M/MV5BZmZkZjNhMWMtM2U0Mi00MjdlLTk3NmMtMTMwZjgwOTJmODMzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
-                fondoAnimado: "https://giffiles.alphacoders.com/219/219025.gif", 
-                enlaceAnime: "",
-                enlaceManga: "",
-                enlaceNovela: "",
-                musica: ""
-            },
-            { 
-                titulo: "Sakamoto Days", 
-                imagen: "https://m.media-amazon.com/images/M/MV5BM2MwZDRmYWItNGIzZC00ZWExLWEwNWYtNmM1ZmU3OTA3NmY4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
-                fondoAnimado: "https://giffiles.alphacoders.com/223/223323.gif", 
-                enlaceAnime: "",
-                enlaceManga: "",
-                enlaceNovela: "",
-                musica: ""
-            },
-            { 
-                titulo: "Tokyo Ghoul", 
-                imagen: "https://m.media-amazon.com/images/M/MV5BYmU0ODU1MzItYzA4Yi00NjI1LWIxNWQtYmRiMTkxNGQ2Mjk1XkEyXkFqcGc@._V1_.jpg", 
-                fondoAnimado: "https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyeXNnbHljdWQwNjh1NGpsYWV3czh3N3Y2amx4aHYxbjc0eDJ4OXkwZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2XLoAphEiufV6/giphy.gif", 
-                enlaceAnime: "",
-                enlaceManga: "",
-                enlaceNovela: "",
-                musica: ""
-            },
-            { 
-                titulo: "Vinland Saga", 
-                imagen: "https://m.media-amazon.com/images/M/MV5BNDA3MGNmZTEtMzFiMy00ZmViLThhNmQtMjQ4ZDc5MDEyN2U1XkEyXkFqcGc@._V1_.jpg", 
-                fondoAnimado: "https://i.pinimg.com/originals/4e/f5/5e/4ef55eb43832b08ce2ca61469158c6e6.gif", 
-                enlaceAnime: "",
-                enlaceManga: "",
-                enlaceNovela: "",
-                musica: ""
-            },
-            { 
-                titulo: "JoJo's Bizarre Adventure", 
-                imagen: "https://m.media-amazon.com/images/M/MV5BMzIyNzY4NTMtNmVhYS00OWFhLTkwMWMtOGFkNTdmNWU2ZDdiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
-                fondoAnimado: "https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyejV0d2c5cnAwbG1rcTBpN3p1a3B3bnZoc3dwZDBnaHRtMDlsd2N6YSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/4N5vB4aErlVtVsywBw/source.gif", 
-                enlaceAnime: "",
-                enlaceManga: "",
-                enlaceNovela: "",
-                musica: ""
-            },
-            { 
-                titulo: "Re:Zero", 
-                imagen: "https://m.media-amazon.com/images/M/MV5BZWI4OTVkNDgtOTBmMC00M2I3LTk3NTctOWY3NmRkODIxMDViXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
-                fondoAnimado: "https://i.makeagif.com/media/5-13-2020/1xQsvl.gif", 
-                enlaceAnime: "",
-                enlaceManga: "",
-                enlaceNovela: "",
-                musica: ""
-            },
-            { 
-                titulo: "Dandadan", 
-                imagen: "https://m.media-amazon.com/images/M/MV5BYWFhOWMxNTYtZThiMi00ZmQ5LTlmODktN2QwNzUyZjMyZGQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", 
-                fondoAnimado: "https://i.pinimg.com/originals/47/43/d6/4743d6517d396e2c4e622a6c8f47832d.gif", 
-                enlaceAnime: "",
-                enlaceManga: "",
-                enlaceNovela: "",
-                musica: ""
-            },
-            { 
-                titulo: "Record of Ragnarok", 
-                imagen: "https://m.media-amazon.com/images/M/MV5BNTMzN2VjNmQtZTVjZi00M2MyLWJlOTYtYjMxODA0ZjhmYjliXkEyXkFqcGc@._V1_.jpg", 
-                fondoAnimado: "https://i.pinimg.com/originals/cd/53/bd/cd53bd81189f8604c7d0863cfea0c65d.gif", 
-                enlaceAnime: "",
-                enlaceManga: "",
-                enlaceNovela: "",
-                musica: ""
-            },
-            { 
-                titulo: "Nanatsu no Taizai", 
-                imagen: "https://m.media-amazon.com/images/M/MV5BZTA5MTM1ZDMtMTQ0YS00ODQ2LWI1MzYtYjFkZmEwNTVlZTNlXkEyXkFqcGc@._V1_.jpg", 
-                fondoAnimado: "https://i.pinimg.com/originals/27/2a/60/272a60ea243697ba2b2c210b2dfba8d2.gif", 
-                enlaceAnime: "https://tioanime.com/anime/nanatsu-no-taizai",
-                enlaceManga: "https://zonatmo.org/library/manga/26928/nanatsu-no-taizai",
-                enlaceNovela: "",
-                musica: ""
-            },
-            { 
-                titulo: "Bleach", 
-                imagen: "https://m.media-amazon.com/images/M/MV5BOWQwOWY5NTUtMjAyZi00YjQzLTkwODgtNmQwZjU1MGIzZDhjXkEyXkFqcGc@._V1_.jpg", 
-                fondoAnimado: "https://giffiles.alphacoders.com/154/154405.gif", 
-                enlaceAnime: "https://tioanime.com/anime/bleach-tvvvvvv",
-                enlaceManga: "https://zonatmo.org/library/manga/8138/bleach",
-                enlaceNovela: "",
-                musica: "shunsui-bankai.mp3"
+                enlaceAnime: "", enlaceManga: "", enlaceNovela: "", musica: ""
             }
         ];
 
         // --- SISTEMA INTERNO ---
+        // Función para renderizar una categoría específica en su contenedor
         function mostrarTarjetas(lista, contenedorId) {
             const contenedor = document.getElementById(contenedorId);
-            let contenidoHtml = '';
             
+            // Si la categoría no tiene animes aún (como Romance)
+            if (lista.length === 0) {
+                contenedor.innerHTML = '<div class="mensaje-vacio">Próximamente agregaremos obras a esta sección...</div>';
+                return;
+            }
+
+            let contenidoHtml = '';
             lista.forEach((item) => {
                 const itemData = encodeURIComponent(JSON.stringify(item));
                 contenidoHtml += `
@@ -585,7 +626,7 @@
             const reproductor = document.getElementById('reproductor-musica');
             if(item.musica && item.musica !== "" && item.musica !== "  ") {
                 reproductor.src = item.musica;
-                reproductor.volume = 0.2; // Volumen bajo general para todas las canciones
+                reproductor.volume = 0.2; 
                 reproductor.play().catch(e => console.log("El navegador bloqueó el autoplay", e));
             } else {
                 reproductor.src = "";
@@ -633,8 +674,13 @@
             document.getElementById('vista-principal').style.display = 'block';
         }
 
-        // INICIAR LA PÁGINA CON EL CATÁLOGO ÚNICO
-        mostrarTarjetas(catalogoCompleto, 'grid-catalogo');
+        // INICIALIZACIÓN: Filtramos el catálogo principal para cada sección
+        mostrarTarjetas(catalogoCompleto.filter(i => i.categoria === 'shonen'), 'grid-shonen');
+        mostrarTarjetas(catalogoCompleto.filter(i => i.categoria === 'isekai'), 'grid-isekai');
+        mostrarTarjetas(catalogoCompleto.filter(i => i.categoria === 'seinen'), 'grid-seinen');
+        mostrarTarjetas(catalogoCompleto.filter(i => i.categoria === 'escolar'), 'grid-escolar');
+        mostrarTarjetas(catalogoCompleto.filter(i => i.categoria === 'romance'), 'grid-romance');
+        
     </script>
 </body>
 </html>
