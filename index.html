@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lora:ital@1&display=swap" rel="stylesheet">
     
     <style>
-        /* --- DISEÑO GENERAL Y FONDO -- */
+       
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(rgba(15, 15, 15, 0.85), rgba(15, 15, 15, 0.95)), url('https://cdn.wallpapersafari.com/31/92/a1oLCz.jpg') no-repeat center center fixed;
@@ -19,7 +19,7 @@
             scroll-behavior: smooth;
         }
 
-        /* --- ENCABEZADO ÉPICO --- */
+        
         .hero-section {
             display: flex;
             flex-direction: column;
@@ -99,7 +99,7 @@
             box-shadow: 0 8px 25px rgba(243, 156, 18, 0.8);
         }
 
-        /* Botón especial +18 en rojo */
+       
         .hero-nav a.btn-red {
             background: linear-gradient(45deg, #c0392b, #e74c3c);
             box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
@@ -124,7 +124,7 @@
             letter-spacing: 2px;
         }
 
-        /* Estilo especial título +18 */
+       
         #plus18 h2 { color: #e74c3c; border-bottom-color: rgba(231, 76, 60, 0.3); }
 
         .grid {
@@ -149,7 +149,7 @@
             border-color: #f39c12;
         }
 
-        /* Hover especial para tarjeta +18 */
+        
         .card-plus18:hover { box-shadow: 0 10px 20px rgba(231, 76, 60, 0.4); border-color: #e74c3c; }
 
         .card img { width: 100%; height: 250px; object-fit: cover; }
@@ -157,7 +157,7 @@
 
         .mensaje-vacio { grid-column: 1 / -1; color: #a29bfe; font-style: italic; font-size: 1.1rem; padding: 20px 0; }
 
-        /* --- VISTA DE DETALLE --- */
+        
         #vista-detalle {
             display: none; min-height: 100vh; background-size: cover;
             background-position: center; background-attachment: fixed; position: relative;
@@ -201,7 +201,7 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- SISTEMA TROLL: MODAL +18 Y VISTA PAJÍN --- */
+        
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center;
@@ -229,7 +229,7 @@
         #vista-pajin img { max-width: 90%; width: 400px; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
         #vista-pajin p { font-size: 1.5rem; color: white; margin-bottom: 30px;}
 
-        /* --- ADAPTACIÓN PARA CELULARES --- */
+        /*ADAPTACIÓN PARA CELULARES*/
         @media (max-width: 768px) {
             .hero-title { font-size: 2.8rem; }
             .detalle-titulo { font-size: 2.5rem; }
@@ -246,10 +246,10 @@
 </head>
 <body>
 
-    <!-- REPRODUCTOR DE MÚSICA -->
+    
     <audio id="reproductor-musica" loop></audio>
 
-    <!-- VENTANA MODAL +18 -->
+   
     <div id="modal-18" class="modal-overlay">
         <div class="modal-content">
             <h2>⚠️ ADVERTENCIA</h2>
@@ -261,7 +261,6 @@
         </div>
     </div>
 
-    <!-- PANTALLA TROLL: ALTO AHI PAJIN -->
     <div id="vista-pajin">
         <h1>¡ALTO AHÍ PAJÍN! 🫵🛑</h1>
         <img src="https://i.kym-cdn.com/entries/icons/original/000/033/758/Screen_Shot_2020-04-28_at_12.21.48_PM.png" alt="Bonk Doge">
@@ -269,7 +268,7 @@
         <button class="btn-magico btn-manga" onclick="perdonVolver()">Perdón, volver al inicio 😔</button>
     </div>
 
-    <!-- VISTA PRINCIPAL (Catálogo) -->
+    
     <div id="vista-principal">
         <header class="hero-section">
             <span class="hero-subtitle">♦ Mi Biblioteca Personal ♦</span>
@@ -317,7 +316,7 @@
                 <div class="grid" id="grid-romance"></div>
             </section>
 
-            <!-- LA SECCIÓN TRAMPA -->
+            
             <section id="plus18">
                 <h2>Contenido +18 🔞</h2>
                 <div class="grid" id="grid-plus18"></div>
@@ -326,7 +325,7 @@
         </div>
     </div>
 
-    <!-- VISTA DE DETALLE -->
+    <! VISTA DE DETALLE >
     <div id="vista-detalle">
         <div class="detalle-overlay">
             <button class="btn-volver" onclick="volverAlCatalogo()">⬅ Volver</button>
@@ -342,7 +341,7 @@
     </div>
 
     <script>
-        // --- BASE DE DATOS UNIFICADA ---
+      
         const catalogoCompleto = [
             { 
                 titulo: "Naruto", categoria: "shonen",
@@ -513,7 +512,6 @@
                 enlaceAnime: "", enlaceManga: "", enlaceNovela: "", musica: ""
             },
 
-            // --- LA TRAMPA +18 ---
             {
                 titulo: "Galería Privada 🔞", 
                 categoria: "plus18",
@@ -524,7 +522,6 @@
             }
         ];
 
-        // --- SISTEMA INTERNO ---
         function mostrarTarjetas(lista, contenedorId) {
             const contenedor = document.getElementById(contenedorId);
             
@@ -551,7 +548,7 @@
         function abrirDetalle(itemDataTexto) {
             const item = JSON.parse(decodeURIComponent(itemDataTexto));
             
-            // --- DETECTAR SI ES LA TRAMPA +18 ---
+           
             if (item.esTrampa) {
                 document.getElementById('modal-18').style.display = 'flex';
                 return;
@@ -614,7 +611,7 @@
             document.getElementById('vista-principal').style.display = 'block';
         }
 
-        // --- FUNCIONES DE LA BROMA ---
+       
         function cerrarModal() {
             document.getElementById('modal-18').style.display = 'none';
         }
@@ -641,7 +638,8 @@
         mostrarTarjetas(catalogoCompleto.filter(i => i.categoria === 'isekai'), 'grid-isekai');
         mostrarTarjetas(catalogoCompleto.filter(i => i.categoria === 'seinen'), 'grid-seinen');
         mostrarTarjetas(catalogoCompleto.filter(i => i.categoria === 'escolar'), 'grid-escolar');
-        mostrarTarjetas(catalogoCompleto.filter(i => i.categoria === 'romance'), 'grid-romance');
+        mostrarTarjetas(catalogoCompleto.filter(i => i.categoria === 'romance'), 'grid-romance');v
+
         
         mostrarTarjetas(catalogoCompleto.filter(i => i.categoria === 'plus18'), 'grid-plus18');
         
